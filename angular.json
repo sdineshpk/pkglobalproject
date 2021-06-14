@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "cli": {
+    "defaultCollection": "@nrwl/angular"
+  },
+  "defaultProject": "book-sale",
+  "schematics": {
+    "@nrwl/angular": {
+      "application": {
+        "linter": "eslint"
+      },
+      "library": {
+        "linter": "eslint"
+      },
+      "storybook-configuration": {
+        "linter": "eslint"
+      }
+    },
+    "@nrwl/angular:application": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest",
+      "e2eTestRunner": "cypress"
+    },
+    "@nrwl/angular:library": {
+      "style": "scss",
+      "linter": "eslint",
+      "unitTestRunner": "jest"
+    },
+    "@nrwl/angular:component": {
+      "style": "scss"
+    }
+  },
+  "projects": {
+    "book-sale": {
+      "projectType": "application",
+      "root": "apps/book-sale",
+      "sourceRoot": "apps/book-sale/src",
+      "prefix": "pkglobal",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/book-sale",
+            "index": "apps/book-sale/src/index.html",
+            "main": "apps/book-sale/src/main.ts",
+            "polyfills": "apps/book-sale/src/polyfills.ts",
+            "tsConfig": "apps/book-sale/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/book-sale/src/favicon.ico",
+              "apps/book-sale/src/assets"
+            ],
+            "styles": ["apps/book-sale/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/book-sale/src/environments/environment.ts",
+                  "with": "apps/book-sale/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "book-sale:build:production"
+            },
+            "development": {
+              "browserTarget": "book-sale:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "book-sale:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/book-sale/src/**/*.ts",
+              "apps/book-sale/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/book-sale"],
+          "options": {
+            "jestConfig": "apps/book-sale/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "book-sale-e2e": {
+      "root": "apps/book-sale-e2e",
+      "sourceRoot": "apps/book-sale-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/book-sale-e2e/cypress.json",
+            "tsConfig": "apps/book-sale-e2e/tsconfig.e2e.json",
+            "devServerTarget": "book-sale:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "book-sale:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/book-sale-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
+    }
+  }
+}
