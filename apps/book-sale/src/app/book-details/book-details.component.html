@@ -1,0 +1,22 @@
+<mat-card *ngIf="bookDetails">
+    <mat-card-title>
+      {{ bookDetails.title }}
+      <img [src]="bookDetails.imageLink" />
+    </mat-card-title>
+    <mat-card-content>
+      <div class="rating">Rating : {{ bookDetails.ratingsCount }}</div>
+      <div class="publisher">Publisher : {{ bookDetails.publisher }}</div>
+      <div class="pageCount">Page Count : {{ bookDetails.pageCount }}</div>
+      <div class="Language">Language : {{ bookDetails.language }}</div>
+      <div class="description">
+        {{ bookDetails.description }}
+      </div>
+      <div class="written">Written By {{ bookDetails.authors }}</div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button color="primary" mat-flat-button (click)="addToCart()">
+        Add to Card
+      </button>
+      <button color="primary" mat-flat-button (click)="buyNow()">Buy Now</button>
+    </mat-card-actions>
+  </mat-card>

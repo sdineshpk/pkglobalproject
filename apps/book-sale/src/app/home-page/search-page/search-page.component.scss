@@ -1,0 +1,26 @@
+mat-card {
+    padding: 20px;
+    cursor: pointer;
+  }
+  mat-card img {
+    width: 100px;
+    height: 100px;
+    float: right;
+  }
+  .description {
+    text-overflow: ellipsis;
+    height: 100px;
+    overflow: hidden;
+  }
+  .written {
+    margin-top: 20px;
+  }
+  form {
+    text-align: center;
+  }
+  .searchicon:hover {
+    cursor: pointer;
+  }
+  form#searchForm {
+   padding-top: 10px;
+  }

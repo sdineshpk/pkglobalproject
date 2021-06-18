@@ -1,0 +1,23 @@
+<form id="searchForm" [formGroup]="searchForm" (ngSubmit)="onSubmit()">
+    <mat-form-field>
+      <mat-label>Search in Library</mat-label>
+      <input matInput formControlName="searchWord" />
+    </mat-form-field>
+    <span (click)="onSubmit()" class="material-icons searchicon">search </span>
+  </form>
+  <mat-grid-list cols="2" rowHeight="2:1">
+    <mat-grid-tile *ngFor="let item of items; let i = index">
+      <mat-card (click)="getBookDetails(i)">
+        <mat-card-title>
+          {{ item.title }}
+          <img [src]="item.imageLink" />
+        </mat-card-title>
+        <mat-card-content>
+          <div class="description">
+            {{ item.description }}
+          </div>
+          <div class="written">Written By {{ item.authors }}</div>
+        </mat-card-content>
+      </mat-card>
+    </mat-grid-tile>
+  </mat-grid-list>
