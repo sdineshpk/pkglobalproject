@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import {
   FormBuilder,
+  FormGroup,
   Validators,
 } from '@angular/forms';
 import { Book } from '../book.model';
@@ -60,8 +61,8 @@ export class BillingDetailsComponent implements OnInit, OnDestroy {
       })
     );
   }
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  onSubmit(billingForm:any): void {
+  
+  onSubmit(billingForm:FormGroup): void {
     //name: string, email: string, phone: number, address: string
     this.books.forEach((book) => {
       this.collection = {
