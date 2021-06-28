@@ -31,7 +31,7 @@ export class HomePageComponent {
 
   constructor( private router: Router) { }
 
-  routePage(item:any){
+  routePage(item:MenuItem){
     this.router.navigate([item.routePath]);
   }
 

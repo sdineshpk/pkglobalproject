@@ -12,7 +12,7 @@ import { CollectionService } from '../collection.service';
   styleUrls: ['./book-details.component.scss']
 })
 export class BookDetailsComponent implements OnInit, OnDestroy {
-  id: string="";
+  id="";
   bookDetails: any;
   subscriptions: Subscription[] = [];
 

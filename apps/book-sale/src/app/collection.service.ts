@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { CollectionModule } from './collection/collection.model';
+import { Book } from './book.model';
 
 @Injectable({
   providedIn: 'root'
@@ -8,8 +9,10 @@ import { CollectionModule } from './collection/collection.model';
 export class CollectionService {
 
   collections: CollectionModule[] = [];
-  mycollection$ = new BehaviorSubject(null);
+  books: Book[] = [];
+  mycollection$ = new BehaviorSubject(this.books);
 
+  // eslint-disable-next-line @typescript-eslint/no-empty-function
   constructor() {}
   getCollections(): CollectionModule[] {
     return this.collections;

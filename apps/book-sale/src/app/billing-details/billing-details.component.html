@@ -3,10 +3,7 @@
   [formGroup]="billingForm"
   (ngSubmit)="
     onSubmit(
-      billingForm.value.name,
-      billingForm.value.email,
-      billingForm.value.phone,
-      billingForm.value.address
+      billingForm
     )
   " fxLayout="column" fxLayoutWrap fxLayoutGap="0.5%"
 >

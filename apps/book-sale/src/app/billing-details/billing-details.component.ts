@@ -9,6 +9,7 @@ import { CollectionService } from '../collection.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnakBarComponent } from '../snak-bar/snak-bar.component';
 import { Subscription } from 'rxjs';
+import { CollectionModule } from '../collection/collection.model';
 
 @Component({
   selector: 'app-billing-details',
@@ -18,7 +19,16 @@ import { Subscription } from 'rxjs';
 export class BillingDetailsComponent implements OnInit, OnDestroy {
   isValid = true;
   books: Book[] = [];
-  collection: any={};
+  collection: CollectionModule={
+    title: "",
+    imgLink: "",
+    description: "",
+    authors: "",  
+    name: "",
+    email: "",
+    phone: 0,
+    address: "",
+  };
   isCart = false;
   subscriptions: Subscription[] = [];
   billingForm = this.fb.group({
@@ -37,7 +47,7 @@ export class BillingDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.mycollectionService.mycollection$.subscribe((res:any) => {
+      this.mycollectionService.mycollection$.subscribe((res:Book[]) => {
         if (Array.isArray(res)) {
           this.isCart = true;
           res.forEach((book) => {
@@ -50,17 +60,19 @@ export class BillingDetailsComponent implements OnInit, OnDestroy {
       })
     );
   }
-  onSubmit(name: string, email: string, phone: number, address: string): void {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSubmit(billingForm:any): void {
+    //name: string, email: string, phone: number, address: string
     this.books.forEach((book) => {
       this.collection = {
         title: book?.title || '',
         imgLink: book?.imageLink || '',
         description: book?.description || '',
         authors: book?.authors || '',
-        name: name || '',
-        email: email || '',
-        phone: phone || 0,
-        address: address || '',
+        name: billingForm.value.name || '',
+        email: billingForm.value.email || '',
+        phone: billingForm.value.phone || 0,
+        address: billingForm.value.address || '',
       };
       this.mycollectionService.addCollection(this.collection);
       if (this.isCart) {

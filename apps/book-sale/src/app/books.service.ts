@@ -8,7 +8,7 @@ import { map } from 'rxjs/internal/operators/map';
   providedIn: 'root',
 })
 export class BooksService {
-  books$ = new BehaviorSubject(null);
+  books$ = new BehaviorSubject({});
   search = '';
   BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q=';
   books: Book[] = [];
