@@ -13,7 +13,18 @@ import { CollectionService } from '../collection.service';
 })
 export class BookDetailsComponent implements OnInit, OnDestroy {
   id="";
-  bookDetails: Book[] = [];
+  bookDetails: Book={
+    id: "",
+    title: "",
+    imageLink: "",
+    description: "",
+    authors: "",
+  
+    ratingsCount: "",
+    publisher: "",
+    pageCount: "",
+    language: "",
+  };
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -25,15 +36,17 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.subscriptions.push(
       this.booksService.books$.subscribe((response:Book[]) => {
-        this.bookDetails = response;
+        this.bookDetails = response[0];
       })
     );
   }
   addToCart(): void {
-  this.cartService.addCartItem(this.bookDetails[this.bookDetails.length-1]);
+  this.cartService.addCartItem(this.bookDetails);
   }
   buyNow(): void {
-   this.myCollectionService.mycollection$.next(this.bookDetails);
+    const book:Book[]=[];
+    book.push(this.bookDetails);
+   this.myCollectionService.mycollection$.next(book);
     this.router.navigate(['/home/billingpage']);
   }
   ngOnDestroy(): void {

@@ -48,7 +48,8 @@ export class SearchPageComponent implements OnInit {
     );
   }
   getBookDetails(id: number): void {
-      const item:Book=this.items[id];
+      const item:Book[]=[];
+      item.push(this.items[id]);
       this.booksService.books$.next(item);
       this.router.navigate(['/home//books']);
   }
