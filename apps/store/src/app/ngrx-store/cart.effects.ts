@@ -30,7 +30,21 @@ export class CartEffects {
           .get<Book[]>('https://www.googleapis.com/books/v1/volumes?q=' + bookData.payload)
           .pipe(
             map((res: any) => {
-              const books = res || [];
+              const books:Book[] = [];
+              res.items.map((item: any) => {
+                const book: Book = {
+                  id: item.id,
+                  title: item.volumeInfo.title,
+                  imageLink: item.volumeInfo?.imageLinks?.thumbnail,
+                  description: item.volumeInfo.description,
+                  authors: item.volumeInfo.authors,
+                  ratingsCount: item.volumeInfo.ratingsCount,
+                  publisher: item.volumeInfo.publisher,
+                  pageCount: item.volumeInfo.pageCount,
+                  language: item.volumeInfo.language,
+                };
+                books.push(book);
+              });
               return new cartActions.AddBooks({ books });
             }),
             catchError((errorRes) => {
