@@ -1,0 +1,27 @@
+mat-card {
+  margin: 20px;
+  cursor: pointer;
+}
+mat-card img {
+  width: 50px;
+  height: 50px;
+  float: right;
+}
+.description {
+  text-overflow: ellipsis;
+  height: 100px;
+  /* white-space: nowrap; */
+  overflow: hidden;
+}
+.written {
+  margin-top: 20px;
+}
+form {
+  margin-left: 30%;
+}
+.searchicon:hover {
+  cursor: pointer;
+}
+form#searchForm {
+  margin-top: 10px;
+}

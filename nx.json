@@ -25,6 +25,13 @@
     "book-sale-e2e": {
       "tags": [],
       "implicitDependencies": ["book-sale"]
+    },
+    "store": {
+      "tags": []
+    },
+    "store-e2e": {
+      "tags": [],
+      "implicitDependencies": ["store"]
     }
   }
 }

@@ -1,0 +1,45 @@
+<mat-toolbar color="primary">
+  <button
+    mat-icon-button
+    class="example-icon"
+    aria-label="Example icon-button with menu icon"
+  >
+    <mat-icon (click)="opened = !opened">menu</mat-icon>
+  </button>
+  <span class="main-title">My App</span>
+  <span class="example-spacer"></span>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav mode="side" [(opened)]="opened">
+    <div routerLink="/search" routerLinkActive="active">
+      <mat-icon>search</mat-icon> Search
+    </div>
+    <br />
+    <div routerLink="/cart">
+      <mat-icon
+        [matBadgeHidden]="!(items$).length"
+        [matBadge]="(items$).length"
+        matBadgeColor="warn"
+        matBadgePosition="above before"
+        >shopping_cart</mat-icon
+      >Cart
+    </div>
+
+    <br />
+    <div routerLink="/mycollection">
+      <mat-icon
+        [matBadgeHidden]="!(collections$).length"
+        [matBadge]="(collections$).length"
+        matBadgeColor="warn"
+        matBadgePosition="above before"
+        >library_books</mat-icon
+      >
+      My Collection
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-container>
+    <router-outlet></router-outlet>
+  </mat-sidenav-container>
+</mat-sidenav-container>

@@ -1,0 +1,23 @@
+mat-card {
+  margin-left: 6%;
+  margin-right: 6%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+img {
+  width: 60px;
+  height: 70px;
+  float: right;
+}
+.mat-card-title {
+  display: block;
+  margin-bottom: 5rem;
+}
+.description,
+.written {
+  margin-bottom: 1rem;
+}
+.bold {
+  font-weight: 500;
+  margin-right: 3px;
+}
