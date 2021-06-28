@@ -8,10 +8,11 @@ import { map } from 'rxjs/internal/operators/map';
   providedIn: 'root',
 })
 export class BooksService {
-  books$ = new BehaviorSubject({});
+  books: Book[] = [];
+  books$ = new BehaviorSubject(this.books);
   search = '';
   BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q=';
-  books: Book[] = [];
+  
 
   constructor(private httpClient: HttpClient) {}
   getBooksByName(name: string): Observable<Book[]> {

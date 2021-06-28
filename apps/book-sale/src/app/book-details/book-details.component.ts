@@ -13,7 +13,7 @@ import { CollectionService } from '../collection.service';
 })
 export class BookDetailsComponent implements OnInit, OnDestroy {
   id="";
-  bookDetails: any;
+  bookDetails: Book[] = [];
   subscriptions: Subscription[] = [];
 
   constructor(
@@ -24,13 +24,13 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.subscriptions.push(
-      this.booksService.books$.subscribe((response) => {
+      this.booksService.books$.subscribe((response:Book[]) => {
         this.bookDetails = response;
       })
     );
   }
   addToCart(): void {
-  this.cartService.addCartItem(this.bookDetails);
+  this.cartService.addCartItem(this.bookDetails[this.bookDetails.length-1]);
   }
   buyNow(): void {
    this.myCollectionService.mycollection$.next(this.bookDetails);
