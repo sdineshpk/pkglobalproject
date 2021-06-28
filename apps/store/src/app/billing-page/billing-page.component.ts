@@ -28,7 +28,7 @@ export class BillingPageComponent implements OnInit {
   billingForm = this.fb.group({
     name: ['', Validators.required],
     email: ['', Validators.required],
-    phone: [0, Validators.required],
+    phone: ['', Validators.required],
     address: ['', Validators.required],
   });
 

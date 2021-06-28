@@ -11,7 +11,7 @@ import { Collection } from './collection.model';
   styleUrls: ['./app.component.css'],
 })
 export class AppComponent implements OnInit {
-  opened = true;
+  opened = false;
   title = 'store';
   items$: Book[]=[];
   collections$: Collection[]=[];
