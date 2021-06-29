@@ -214,7 +214,11 @@
               "browserTarget": "store:build:development"
             }
           },
-          "defaultConfiguration": "development"
+          "defaultConfiguration": "development",
+          "options": {
+            "browserTarget": "store:build",
+            "proxyConfig": "apps/store/proxy.conf.json"
+          }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
@@ -236,6 +240,56 @@
           "outputs": ["coverage/apps/store"],
           "options": {
             "jestConfig": "apps/store/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "store-api": {
+      "root": "apps/store-api",
+      "sourceRoot": "apps/store-api/src",
+      "projectType": "application",
+      "architect": {
+        "build": {
+          "builder": "@nrwl/node:build",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/store-api",
+            "main": "apps/store-api/src/main.js",
+            "tsConfig": "apps/store-api/tsconfig.app.json",
+            "assets": ["apps/store-api/src/assets"]
+          },
+          "configurations": {
+            "production": {
+              "optimization": true,
+              "extractLicenses": true,
+              "inspect": false,
+              "fileReplacements": [
+                {
+                  "replace": "apps/store-api/src/environments/environment.js",
+                  "with": "apps/store-api/src/environments/environment.prod.js"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@nrwl/node:execute",
+          "options": {
+            "buildTarget": "store-api:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/store-api/**/*.js"]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/store-api"],
+          "options": {
+            "jestConfig": "apps/store-api/jest.config.js",
             "passWithNoTests": true
           }
         }
