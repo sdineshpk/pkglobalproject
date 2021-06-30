@@ -1,39 +1,20 @@
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SearchComponent } from './search.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
-import { of } from 'rxjs';
 import { BooksFacadeService } from '../../app/ngrx-store/books-facade.service';
-import { Store } from '@ngrx/store';
 import * as fromApp from '../../app/ngrx-store/app.reducer';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { CartEffects } from '../ngrx-store/cart.effects';
 
-const mockBooks = [
-  {
-    id: '1',
-    title: 'Angular',
-    imageLink: '/',
-    description: 'desc1',
-    authors: 'author1',
-    ratingsCount: '5',
-    publisher: 'pub1',
-    pageCount: '10',
-    language: 'en',
-  },
-];
 describe('SearchComponent', () => {
   let component: SearchComponent;
   let fixture: ComponentFixture<SearchComponent>;
   let bookService: BooksFacadeService;
-  let store: Store<fromApp.AppState>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -50,7 +31,6 @@ describe('SearchComponent', () => {
       schemas: [NO_ERRORS_SCHEMA],
     }).compileComponents();
     bookService = TestBed.inject(BooksFacadeService);
-    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {

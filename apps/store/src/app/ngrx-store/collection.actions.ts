@@ -7,4 +7,4 @@ export class AddCollection implements Action {
   readonly type = ADD_COLLECTION;
   constructor(public payload: Collection) {}
 }
-export type CollectionActions = AddCollection | any;
+export type CollectionActions = AddCollection | null;

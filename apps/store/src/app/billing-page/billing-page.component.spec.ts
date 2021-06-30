@@ -1,9 +1,15 @@
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { NgForm, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormControl,
+  FormGroup,
+  NgForm,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Store, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { BooksFacadeService } from '../ngrx-store/books-facade.service';
 import * as fromApp from '../ngrx-store/app.reducer';
 
@@ -16,7 +22,6 @@ describe('BillingPageComponent', () => {
   let component: BillingPageComponent;
   let fixture: ComponentFixture<BillingPageComponent>;
   let bookService: BooksFacadeService;
-  let store: Store<fromApp.AppState>;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -39,7 +44,6 @@ describe('BillingPageComponent', () => {
     component = fixture.componentInstance;
     fixture.detectChanges();
     bookService = TestBed.inject(BooksFacadeService);
-    store = TestBed.inject(Store);
   });
 
   it('should create', () => {
@@ -48,7 +52,14 @@ describe('BillingPageComponent', () => {
   it('should be called onSubmit', () => {
     spyOn(bookService, 'addCollection').and.returnValue(undefined);
     component.isCart = false;
-    component.onSubmit('name', 's@g.com', 0, 'address');
+    component.billingForm ==
+      new FormGroup({
+        name: new FormControl('name', Validators.required),
+        email: new FormControl('s@g.com', Validators.required),
+        phone: new FormControl(0, Validators.required),
+        address: new FormControl('address', Validators.required),
+      });
+    component.onSubmit(component.billingForm);
 
     expect(bookService.addCollection).toHaveBeenCalled();
   });

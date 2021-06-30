@@ -1,12 +1,12 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, NgForm, Validators } from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { Book } from '../book.model';
 import { Observable, Subscription } from 'rxjs';
 import { BooksFacadeService } from '../../app/ngrx-store/books-facade.service';
 
 @Component({
-  selector: 'app-search',
+  selector: 'pkglobal-app-search',
   templateUrl: './search.component.html',
   styleUrls: ['./search.component.css'],
 })

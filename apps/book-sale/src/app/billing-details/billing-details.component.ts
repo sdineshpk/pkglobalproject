@@ -43,6 +43,10 @@ export class BillingDetailsComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.books = this.cartService.getCartItems();
+    if (this.books.length > 0) {
+      this.isCart = true;
+    }
     this.subscriptions.push(
       this.mycollectionService.mycollection$.subscribe((res: Book[]) => {
         if (Array.isArray(res)) {

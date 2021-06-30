@@ -1,11 +1,7 @@
 <form
   id="billingForm"
   [formGroup]="billingForm"
-  (ngSubmit)="
-    onSubmit(
-      billingForm
-    )
-  "
+  (ngSubmit)="onSubmit(billingForm)"
 >
   <mat-label>Billing Info</mat-label>
   <mat-form-field appearance="fill">
@@ -50,7 +46,8 @@
       billingForm.get('name')?.invalid ||
       billingForm.get('email')?.invalid ||
       billingForm.get('phone')?.invalid ||
-      billingForm.get('address')?.invalid"
+      billingForm.get('address')?.invalid
+    "
   >
     Submit
   </button>

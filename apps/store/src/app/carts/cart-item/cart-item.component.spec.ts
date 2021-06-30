@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
-import { Store, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { Book } from '../../book.model';
 import { BooksFacadeService } from '../../ngrx-store/books-facade.service';
 
@@ -15,7 +15,6 @@ describe('CartItemComponent', () => {
   let fixture: ComponentFixture<CartItemComponent>;
   let books: Book[];
   let bookService: BooksFacadeService;
-  let store: Store<fromApp.AppState>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -30,7 +29,6 @@ describe('CartItemComponent', () => {
       providers: [BooksFacadeService],
     }).compileComponents();
     bookService = TestBed.inject(BooksFacadeService);
-    store = TestBed.inject(Store);
   });
 
   beforeEach(() => {

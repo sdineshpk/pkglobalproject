@@ -19,7 +19,7 @@
   <div class="action">
     <button
       color="primary"
-      *ngIf="(cartItems$).length"
+      *ngIf="cartItems$.length"
       mat-flat-button
       (click)="proceedToCheckout()"
     >

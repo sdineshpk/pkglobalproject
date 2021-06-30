@@ -1,7 +1,4 @@
-import { cartReducer } from './cart.reducer';
 import * as cartActions from '../ngrx-store/cart.actions';
-import { Book } from '../book.model';
-import { Collection } from '../collection.model';
 
 describe('CartActions', () => {
   it('should create cart actions', () => {

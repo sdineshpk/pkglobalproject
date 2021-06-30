@@ -1,8 +1,8 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { Router, RouterModule } from '@angular/router';
+import { RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Store, StoreModule } from '@ngrx/store';
+import { StoreModule } from '@ngrx/store';
 import { Book } from '../book.model';
 import { BooksFacadeService } from '../ngrx-store/books-facade.service';
 import * as fromApp from '../ngrx-store/app.reducer';
@@ -16,7 +16,6 @@ describe('BookDetailsComponent', () => {
   let fixture: ComponentFixture<BookDetailsComponent>;
   let book: Book;
   let bookService: BooksFacadeService;
-  let store: Store<fromApp.AppState>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -36,9 +35,7 @@ describe('BookDetailsComponent', () => {
     fixture = TestBed.createComponent(BookDetailsComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
-    // mockCartService = TestBed.inject(CartService);
     bookService = TestBed.inject(BooksFacadeService);
-    store = TestBed.inject(Store);
   });
 
   it('should create', () => {

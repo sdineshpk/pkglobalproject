@@ -1,4 +1,3 @@
-import { Action, State } from '@ngrx/store';
 import * as CartActions from './cart.actions';
 import * as cartReducer from '../ngrx-store/cart.reducer';
 import { Book } from '../book.model';
@@ -21,7 +20,7 @@ describe('CartReducer', () => {
     };
   });
   afterEach(() => {
-    initialState = null;
+    initialState = cartReducer.initialState;
   });
 
   it('should create cart reducer', () => {

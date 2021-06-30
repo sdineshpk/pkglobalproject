@@ -4,7 +4,6 @@ import { Store } from '@ngrx/store';
 import * as fromApp from './app.reducer';
 import * as cartActions from './cart.actions';
 import * as collectionActions from './collection.actions';
-import { Observable } from 'rxjs';
 import { Book } from '../../app/book.model';
 import { Collection } from '../../app/collection.model';
 

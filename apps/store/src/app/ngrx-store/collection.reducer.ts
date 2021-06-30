@@ -1,4 +1,3 @@
-import { Book } from '../book.model';
 import { Collection } from '../collection.model';
 import * as CollectionActions from './collection.actions';
 

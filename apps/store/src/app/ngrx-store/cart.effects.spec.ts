@@ -1,22 +1,18 @@
 import { TestBed } from '@angular/core/testing';
 import { provideMockActions } from '@ngrx/effects/testing';
 import { provideMockStore } from '@ngrx/store/testing';
-import { Action, State, Store } from '@ngrx/store';
+import { Action } from '@ngrx/store';
 import * as CartActions from './cart.actions';
 import * as cartReducer from '../ngrx-store/cart.reducer';
 import { CartEffects } from '../ngrx-store/cart.effects';
 import { Observable, of } from 'rxjs';
-import {
-  HttpClientTestingModule,
-  HttpTestingController,
-} from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
 
 describe('CartEffects', () => {
   let actions$: Observable<Action>;
   let cartEffects: CartEffects;
-  let httpTestingController: HttpTestingController;
-  let httpClient;
+  let httpClient: HttpClient;
 
   let initialState: cartReducer.State;
   const mockBooks = [
@@ -47,7 +43,6 @@ describe('CartEffects', () => {
     });
 
     cartEffects = TestBed.inject(CartEffects);
-    httpTestingController = TestBed.inject(HttpTestingController);
     httpClient = TestBed.inject(HttpClient);
   });
   beforeEach(() => {
@@ -55,7 +50,7 @@ describe('CartEffects', () => {
   });
 
   afterEach(() => {
-    initialState = null;
+    initialState = cartReducer.initialState;
   });
 
   it('should create cartEffects ', () => {
@@ -69,7 +64,7 @@ describe('CartEffects', () => {
     httpClient.get.and.returnValue(of(mockBooks));
     actions$ = of({ type: CartActions.GET_BOOKSBYNAME, payload: 'Angular' });
 
-    cartEffects.getBooksByName$.subscribe((actions) => {
+    cartEffects.getBooksByName$.subscribe(() => {
       expect(action.type).toBe(CartActions.GET_BOOKSBYNAME);
       expect(action.payload).toEqual('Angular');
     });

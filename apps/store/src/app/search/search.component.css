@@ -10,7 +10,6 @@ mat-card img {
 .description {
   text-overflow: ellipsis;
   height: 100px;
-  /* white-space: nowrap; */
   overflow: hidden;
 }
 .written {

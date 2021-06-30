@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { createEffect,  ofType } from '@ngrx/effects';
+import { createEffect, ofType } from '@ngrx/effects';
 import { Actions } from '@ngrx/effects';
 import { of } from 'rxjs';
 import { catchError, map, switchMap } from 'rxjs/operators';
@@ -30,7 +30,7 @@ export class CartEffects {
           .get<Book[]>('/api/books/' + bookData.payload)
           .pipe(
             map((res: Book[]) => {
-              const books:Book[] = res || [];
+              const books: Book[] = res || [];
               return new cartActions.AddBooks({ books });
             }),
             catchError((errorRes) => {

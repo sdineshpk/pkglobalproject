@@ -1,26 +1,12 @@
-import { Action, State } from '@ngrx/store';
 import * as CollectionActions from './collection.actions';
 import * as CollectionReducer from '../ngrx-store/collection.reducer';
-import { Book } from '../book.model';
 import { Collection } from '../collection.model';
 
 describe('CollectionReducer', () => {
   let initialState: CollectionReducer.State;
-  let book: Book;
   let collection: Collection;
   beforeEach(() => {
     initialState = CollectionReducer.initialState;
-    book = {
-      id: '1',
-      title: 'title',
-      imageLink: '',
-      description: '',
-      authors: '',
-      ratingsCount: '',
-      publisher: '',
-      language: '',
-      pageCount: '',
-    };
     collection = {
       title: 'title',
       imgLink: '',
@@ -33,7 +19,7 @@ describe('CollectionReducer', () => {
     };
   });
   afterEach(() => {
-    initialState = null;
+    initialState = CollectionReducer.initialState;
   });
 
   it('should create cart reducer', () => {

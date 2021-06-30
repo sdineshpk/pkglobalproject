@@ -19,15 +19,15 @@ export const initialState: State = {
   selectedId: -1,
   recentSearchWords: [],
   book: {
-    id:"", 
-    title:"", 
-    imageLink:"", 
-    description:"",
-    authors:"", 
-    ratingsCount:"", 
-    publisher:"", 
-    pageCount:"", 
-    language:""
+    id: '',
+    title: '',
+    imageLink: '',
+    description: '',
+    authors: '',
+    ratingsCount: '',
+    publisher: '',
+    pageCount: '',
+    language: '',
   },
 };
 
@@ -35,6 +35,10 @@ export function cartReducer(
   state: State = initialState,
   action: CartActions.CartActions | any
 ): State {
+  const searchWord = action.payload.trim();
+  const searchWords = [...state.recentSearchWords, searchWord];
+  // Delete searchword if it already exists without changing last item which will be accessed in search comp
+  const index = searchWords.findIndex((value) => value === searchWord);
   switch (action.type) {
     case CartActions.ADD_CARTITEM:
       return {
@@ -61,11 +65,6 @@ export function cartReducer(
         ...state,
         isCart: action.payload,
       };
-    // case CartActions.GET_BOOKSBYNAME:
-    //   return {
-    //     ...state,
-    //     searchWord: action.payload,
-    //   };
     case CartActions.ADD_BOOKS:
       return {
         ...state,
@@ -82,11 +81,6 @@ export function cartReducer(
         selectedId: action.payload,
       };
     case CartActions.RECENT_SEARCHWORDS:
-      const searchWord = action.payload.trim();
-      const searchWords = [...state.recentSearchWords, searchWord];
-
-      // Delete searchword if it already exists without changing last item which will be accessed in search comp
-      const index = searchWords.findIndex((value) => value === searchWord);
       if (index !== searchWords.length - 1) {
         searchWords.splice(index, 1);
       }

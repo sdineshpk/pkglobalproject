@@ -7,22 +7,22 @@ import { SnakBarComponent } from '../snak-bar/snak-bar.component';
 import { BooksFacadeService } from '../../app/ngrx-store/books-facade.service';
 
 @Component({
-  selector: 'app-billing-page',
+  selector: 'pkglobal-app-billing-page',
   templateUrl: './billing-page.component.html',
   styleUrls: ['./billing-page.component.css'],
 })
 export class BillingPageComponent implements OnInit {
   isValid = true;
   books: Book[] = [];
-  collection: Collection={
-    title: "",
-    imgLink: "",
-    description: "",
-    authors: "",
-    name: "",
-    email: "",
+  collection: Collection = {
+    title: '',
+    imgLink: '',
+    description: '',
+    authors: '',
+    name: '',
+    email: '',
     phone: 0,
-    address:"",
+    address: '',
   };
   isCart = false;
   billingForm = this.fb.group({
@@ -46,7 +46,7 @@ export class BillingPageComponent implements OnInit {
       (isCart) => (this.isCart = isCart)
     );
   }
-  onSubmit(billingForm:FormGroup): void {
+  onSubmit(billingForm: FormGroup): void {
     if (this.isCart) {
       this.books.forEach((book) => {
         this.collection = {
