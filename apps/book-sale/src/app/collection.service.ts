@@ -11,8 +11,6 @@ export class CollectionService {
   books: Book[] = [];
   mycollection$ = new BehaviorSubject(this.books);
 
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
-  constructor() {}
   getCollections(): CollectionModule[] {
     return this.collections;
   }

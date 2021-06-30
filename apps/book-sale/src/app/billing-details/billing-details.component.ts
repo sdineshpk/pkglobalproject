@@ -59,7 +59,6 @@ export class BillingDetailsComponent implements OnInit, OnDestroy {
   }
 
   onSubmit(billingForm: FormGroup): void {
-    //name: string, email: string, phone: number, address: string
     this.books.forEach((book) => {
       this.collection = {
         title: book?.title || '',
