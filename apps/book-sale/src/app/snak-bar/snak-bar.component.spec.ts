@@ -8,9 +8,8 @@ describe('SnakBarComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SnakBarComponent ]
-    })
-    .compileComponents();
+      declarations: [SnakBarComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

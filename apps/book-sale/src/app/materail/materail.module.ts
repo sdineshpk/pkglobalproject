@@ -11,28 +11,23 @@ import { MatBadgeModule } from '@angular/material/badge';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatGridListModule } from '@angular/material/grid-list';
 
-
-const materialComponents=[
-  MatToolbarModule,    
-    MatMenuModule,
-    MatButtonModule,
-    MatIconModule,
-    MatDividerModule,
-    MatCardModule,
-    MatFormFieldModule,
-    MatInputModule,
-    MatBadgeModule,
-    MatSnackBarModule,
-    MatGridListModule,
-]
+const materialComponents = [
+  MatToolbarModule,
+  MatMenuModule,
+  MatButtonModule,
+  MatIconModule,
+  MatDividerModule,
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatBadgeModule,
+  MatSnackBarModule,
+  MatGridListModule,
+];
 
 @NgModule({
   declarations: [],
-  imports: [
-    materialComponents
-  ],
-  exports:[
-    materialComponents
-  ]
+  imports: [materialComponents],
+  exports: [materialComponents],
 })
-export class MaterailAppModule { }
+export class MaterailAppModule {}

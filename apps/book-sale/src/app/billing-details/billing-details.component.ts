@@ -1,9 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Book } from '../book.model';
 import { CartService } from '../cart.service';
 import { CollectionService } from '../collection.service';
@@ -15,20 +11,20 @@ import { CollectionModule } from '../collection/collection.model';
 @Component({
   selector: 'pkglobal-app-billing-details',
   templateUrl: './billing-details.component.html',
-  styleUrls: ['./billing-details.component.scss']
+  styleUrls: ['./billing-details.component.scss'],
 })
 export class BillingDetailsComponent implements OnInit, OnDestroy {
   isValid = true;
   books: Book[] = [];
-  collection: CollectionModule={
-    title: "",
-    imgLink: "",
-    description: "",
-    authors: "",  
-    name: "",
-    email: "",
+  collection: CollectionModule = {
+    title: '',
+    imgLink: '',
+    description: '',
+    authors: '',
+    name: '',
+    email: '',
     phone: 0,
-    address: "",
+    address: '',
   };
   isCart = false;
   subscriptions: Subscription[] = [];
@@ -48,7 +44,7 @@ export class BillingDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.subscriptions.push(
-      this.mycollectionService.mycollection$.subscribe((res:Book[]) => {
+      this.mycollectionService.mycollection$.subscribe((res: Book[]) => {
         if (Array.isArray(res)) {
           this.isCart = true;
           res.forEach((book) => {
@@ -61,8 +57,8 @@ export class BillingDetailsComponent implements OnInit, OnDestroy {
       })
     );
   }
-  
-  onSubmit(billingForm:FormGroup): void {
+
+  onSubmit(billingForm: FormGroup): void {
     //name: string, email: string, phone: number, address: string
     this.books.forEach((book) => {
       this.collection = {

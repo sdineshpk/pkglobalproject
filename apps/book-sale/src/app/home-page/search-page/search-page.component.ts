@@ -8,9 +8,9 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'pkglobal-app-search-page',
   templateUrl: './search-page.component.html',
-  styleUrls: ['./search-page.component.scss']
+  styleUrls: ['./search-page.component.scss'],
 })
-export class SearchPageComponent implements OnInit,OnDestroy {
+export class SearchPageComponent implements OnInit, OnDestroy {
   searchWord = '';
   items: Book[] = [];
   subscriptions: Subscription[] = [];
@@ -48,15 +48,14 @@ export class SearchPageComponent implements OnInit,OnDestroy {
     );
   }
   getBookDetails(id: number): void {
-      const item:Book[]=[];
-      item.push(this.items[id]);
-      this.booksService.books$.next(item);
-      this.router.navigate(['/home//books']);
+    const item: Book[] = [];
+    item.push(this.items[id]);
+    this.booksService.books$.next(item);
+    this.router.navigate(['/home//books']);
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => {
       subscription.unsubscribe();
     });
   }
-
 }

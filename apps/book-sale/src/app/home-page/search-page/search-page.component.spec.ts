@@ -26,13 +26,15 @@ describe('SearchPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SearchPageComponent ],
+      declarations: [SearchPageComponent],
       imports: [
-        HttpClientTestingModule,RouterTestingModule,FormsModule,
-        ReactiveFormsModule],
-        providers:[FormBuilder,BooksService]
-    })
-    .compileComponents();
+        HttpClientTestingModule,
+        RouterTestingModule,
+        FormsModule,
+        ReactiveFormsModule,
+      ],
+      providers: [FormBuilder, BooksService],
+    }).compileComponents();
     bookService = TestBed.inject(BooksService);
   });
 

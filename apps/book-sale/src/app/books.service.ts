@@ -12,7 +12,6 @@ export class BooksService {
   books$ = new BehaviorSubject(this.books);
   search = '';
   BASE_URL = 'https://www.googleapis.com/books/v1/volumes?q=';
-  
 
   constructor(private httpClient: HttpClient) {}
   getBooksByName(name: string): Observable<Book[]> {

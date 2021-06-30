@@ -7,29 +7,36 @@ import { SearchPageComponent } from './home-page/search-page/search-page.compone
 import { CollectionDetailsComponent } from './collection-details/collection-details.component';
 import { CartItemsComponent } from './cart-items/cart-items.component';
 
-const routes: Routes = [{
-  'path':'home',component:HomePageComponent,
-  children:[
-    { path: 'search', component: SearchPageComponent },
-    {
-      path:'books',component:BookDetailsComponent
-    },
-    {
-      path:'billingpage',component:BillingDetailsComponent
-    },
-    {
-      path:'cart',component:CartItemsComponent
-    },
-    {
-      path:'collection',component:CollectionDetailsComponent
-    },
-    { path: '', redirectTo: '/search', pathMatch: 'full' }
-  ]
-},
-{ path: '', redirectTo: '/home', pathMatch: 'full' }];
+const routes: Routes = [
+  {
+    path: 'home',
+    component: HomePageComponent,
+    children: [
+      { path: 'search', component: SearchPageComponent },
+      {
+        path: 'books',
+        component: BookDetailsComponent,
+      },
+      {
+        path: 'billingpage',
+        component: BillingDetailsComponent,
+      },
+      {
+        path: 'cart',
+        component: CartItemsComponent,
+      },
+      {
+        path: 'collection',
+        component: CollectionDetailsComponent,
+      },
+      { path: '', redirectTo: '/search', pathMatch: 'full' },
+    ],
+  },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

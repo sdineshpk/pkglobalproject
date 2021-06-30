@@ -10,12 +10,10 @@ describe('CartItemsComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CartItemsComponent ],
-      imports: [
-        RouterTestingModule],
-      providers:[CartService]
-    })
-    .compileComponents();
+      declarations: [CartItemsComponent],
+      imports: [RouterTestingModule],
+      providers: [CartService],
+    }).compileComponents();
   });
 
   beforeEach(() => {

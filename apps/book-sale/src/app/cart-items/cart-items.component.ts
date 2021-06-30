@@ -6,15 +6,11 @@ import { CartService } from '../cart.service';
 @Component({
   selector: 'pkglobal-app-cart-items',
   templateUrl: './cart-items.component.html',
-  styleUrls: ['./cart-items.component.scss']
+  styleUrls: ['./cart-items.component.scss'],
 })
 export class CartItemsComponent implements OnInit {
-
   cartItems: Book[] = [];
-  constructor(
-    private cartService: CartService,
-    private router: Router
-  ) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
   ngOnInit(): void {
     this.cartItems = this.cartService.getCartItems();
@@ -25,5 +21,4 @@ export class CartItemsComponent implements OnInit {
   proceedToCheckout(): void {
     this.router.navigate(['/home/billingpage']);
   }
-
 }

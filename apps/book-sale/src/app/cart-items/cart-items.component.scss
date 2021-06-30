@@ -1,27 +1,26 @@
-  
 mat-card-actions {
-    display: flex;
-    justify-content: space-between;
-  }
-  mat-card {
-    margin-left: 6%;
-    margin-right: 6%;
-    margin-bottom: 1rem;
-    margin-top: 1rem;
-  }
-  img {
-    width: 60px;
-    height: 70px;
-    float: right;
-  }
-  .mat-card-title {
-    display: block;
-    margin-bottom: 5rem;
-  }
-  button.mat-primary {
-    margin-left: 6%;
-    margin-right: 6%;
-  }
-  mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
-    cursor: pointer;
-  }
+  display: flex;
+  justify-content: space-between;
+}
+mat-card {
+  margin-left: 6%;
+  margin-right: 6%;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+img {
+  width: 60px;
+  height: 70px;
+  float: right;
+}
+.mat-card-title {
+  display: block;
+  margin-bottom: 5rem;
+}
+button.mat-primary {
+  margin-left: 6%;
+  margin-right: 6%;
+}
+mat-icon.mat-icon.notranslate.material-icons.mat-icon-no-color {
+  cursor: pointer;
+}

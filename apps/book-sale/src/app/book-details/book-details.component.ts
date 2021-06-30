@@ -9,21 +9,21 @@ import { CollectionService } from '../collection.service';
 @Component({
   selector: 'pkglobal-app-book-details',
   templateUrl: './book-details.component.html',
-  styleUrls: ['./book-details.component.scss']
+  styleUrls: ['./book-details.component.scss'],
 })
 export class BookDetailsComponent implements OnInit, OnDestroy {
-  id="";
-  bookDetails: Book={
-    id: "",
-    title: "",
-    imageLink: "",
-    description: "",
-    authors: "",
-  
-    ratingsCount: "",
-    publisher: "",
-    pageCount: "",
-    language: "",
+  id = '';
+  bookDetails: Book = {
+    id: '',
+    title: '',
+    imageLink: '',
+    description: '',
+    authors: '',
+
+    ratingsCount: '',
+    publisher: '',
+    pageCount: '',
+    language: '',
   };
   subscriptions: Subscription[] = [];
 
@@ -35,18 +35,18 @@ export class BookDetailsComponent implements OnInit, OnDestroy {
   ) {}
   ngOnInit(): void {
     this.subscriptions.push(
-      this.booksService.books$.subscribe((response:Book[]) => {
+      this.booksService.books$.subscribe((response: Book[]) => {
         this.bookDetails = response[0];
       })
     );
   }
   addToCart(): void {
-  this.cartService.addCartItem(this.bookDetails);
+    this.cartService.addCartItem(this.bookDetails);
   }
   buyNow(): void {
-    const book:Book[]=[];
+    const book: Book[] = [];
     book.push(this.bookDetails);
-   this.myCollectionService.mycollection$.next(book);
+    this.myCollectionService.mycollection$.next(book);
     this.router.navigate(['/home/billingpage']);
   }
   ngOnDestroy(): void {

@@ -4,10 +4,9 @@ import { CollectionModule } from './collection/collection.model';
 import { Book } from './book.model';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CollectionService {
-
   collections: CollectionModule[] = [];
   books: Book[] = [];
   mycollection$ = new BehaviorSubject(this.books);

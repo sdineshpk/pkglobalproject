@@ -1,5 +1,8 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule,HttpTestingController } from '@angular/common/http/testing';
+import {
+  HttpClientTestingModule,
+  HttpTestingController,
+} from '@angular/common/http/testing';
 
 import { BooksService } from './books.service';
 
@@ -10,7 +13,7 @@ describe('BooksService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
-      providers: [BooksService]
+      providers: [BooksService],
     });
     service = TestBed.inject(BooksService);
     httpTestingController = TestBed.inject(HttpTestingController);
@@ -43,7 +46,6 @@ describe('BooksService', () => {
 
     expect(req.cancelled).toBeFalsy();
     expect(req.request.responseType).toEqual('json');
-    // expect(req.request.url.endsWith(search)).toEqual(true);
     req.flush(mockBooks);
     httpTestingController.verify();
   });

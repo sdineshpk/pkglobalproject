@@ -1,29 +1,29 @@
 <div class="main">
-    <div *ngFor="let item of cartItems">
-      <mat-card>
-        <mat-card-title>
-          {{ item.title }}
-          <img [src]="item.imageLink" />
-        </mat-card-title>
-        <mat-card-content>
-          <div class="description">
-            {{ item.description }}
-          </div>
-        </mat-card-content>
-        <mat-card-actions>
-          <div class="written">Written By {{ item.authors }}</div>
-          <mat-icon (click)="deleteItem(item.id)">delete_forever</mat-icon>
-        </mat-card-actions>
-      </mat-card>
-    </div>
-    <div class="action">
-      <button
-        color="primary"
-        *ngIf="cartItems.length"
-        mat-flat-button
-        (click)="proceedToCheckout()"
-      >
-        Proceed to purchase
-      </button>
-    </div>
+  <div *ngFor="let item of cartItems">
+    <mat-card>
+      <mat-card-title>
+        {{ item.title }}
+        <img [src]="item.imageLink" />
+      </mat-card-title>
+      <mat-card-content>
+        <div class="description">
+          {{ item.description }}
+        </div>
+      </mat-card-content>
+      <mat-card-actions>
+        <div class="written">Written By {{ item.authors }}</div>
+        <mat-icon (click)="deleteItem(item.id)">delete_forever</mat-icon>
+      </mat-card-actions>
+    </mat-card>
   </div>
+  <div class="action">
+    <button
+      color="primary"
+      *ngIf="cartItems.length"
+      mat-flat-button
+      (click)="proceedToCheckout()"
+    >
+      Proceed to purchase
+    </button>
+  </div>
+</div>

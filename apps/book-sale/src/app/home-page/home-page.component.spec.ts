@@ -10,10 +10,9 @@ describe('HomePageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ HomePageComponent ],
-      imports:[RouterTestingModule,RouterModule]
-    })
-    .compileComponents();
+      declarations: [HomePageComponent],
+      imports: [RouterTestingModule, RouterModule],
+    }).compileComponents();
   });
 
   beforeEach(() => {

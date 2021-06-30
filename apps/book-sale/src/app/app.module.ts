@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FlexLayoutModule } from '@angular/flex-layout';
-import { MaterailAppModule} from './materail/materail.module';
+import { MaterailAppModule } from './materail/materail.module';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
@@ -24,7 +24,7 @@ import { CartItemsComponent } from './cart-items/cart-items.component';
     BillingDetailsComponent,
     SnakBarComponent,
     CollectionDetailsComponent,
-    CartItemsComponent
+    CartItemsComponent,
   ],
   imports: [
     BrowserModule,
@@ -34,9 +34,9 @@ import { CartItemsComponent } from './cart-items/cart-items.component';
     FlexLayoutModule,
     MaterailAppModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
