@@ -46,29 +46,23 @@ export class BillingDetailsComponent implements OnInit, OnDestroy {
     this.books = this.cartService.getCartItems();
     if (this.books.length > 0) {
       this.isCart = true;
+    } else {
+      this.subscriptions.push(
+        this.mycollectionService.mycollection$.subscribe((res: Book[]) => {
+          this.books=res;
+          this.isCart=false;
+        })
+      );
     }
-    this.subscriptions.push(
-      this.mycollectionService.mycollection$.subscribe((res: Book[]) => {
-        if (Array.isArray(res)) {
-          this.isCart = true;
-          res.forEach((book) => {
-            this.books.push(book);
-          });
-        } else {
-          this.isCart = false;
-          this.books.push(res);
-        }
-      })
-    );
   }
 
   onSubmit(billingForm: FormGroup): void {
     this.books.forEach((book) => {
       this.collection = {
-        title: book?.title || '',
-        imgLink: book?.imageLink || '',
-        description: book?.description || '',
-        authors: book?.authors || '',
+        title: book.title,
+        imgLink: book.imageLink,
+        description: book.description,
+        authors: book.authors,
         name: billingForm.value.name || '',
         email: billingForm.value.email || '',
         phone: billingForm.value.phone || 0,

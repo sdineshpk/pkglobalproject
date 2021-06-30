@@ -21,7 +21,7 @@ export class BooksService {
           const book: Book = {
             id: item.id,
             title: item.volumeInfo.title,
-            imageLink: item.volumeInfo?.imageLinks?.thumbnail,
+            imageLink: item.volumeInfo.imageLinks?.thumbnail,
             description: item.volumeInfo.description,
             authors: item.volumeInfo.authors,
             ratingsCount: item.volumeInfo.ratingsCount,

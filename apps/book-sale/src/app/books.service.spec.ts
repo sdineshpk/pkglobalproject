@@ -24,19 +24,52 @@ describe('BooksService', () => {
   });
 
   it('should the all the books as result when getBooksByName is called with search keyword', () => {
-    const mockBooks = [
-      {
-        id: '1',
-        title: 'Angular',
-        imageLink: '/',
-        description: 'desc1',
-        authors: 'author1',
-        ratingsCount: '5',
-        publisher: 'pub1',
-        pageCount: '10',
-        language: 'en',
-      },
-    ];
+    const mockBooks = {
+        items: [
+          {
+            id: '1',
+            volumeInfo:{
+            title: 'Angular',
+            imageLinks:{thumbnail: '/'},
+            description: 'desc1',
+            authors: 'author1',
+            ratingsCount: '5',
+            publisher: 'pub1',
+            pageCount: '10',
+            language: 'en',
+            }
+          },
+        ],
+      };
+
+    service.getBooksByName('angular').subscribe((results) => {
+      expect(mockBooks).toBe(results);
+    });
+
+    const req = httpTestingController.expectOne(service.BASE_URL + 'angular');
+
+    expect(req.cancelled).toBeFalsy();
+    expect(req.request.responseType).toEqual('json');
+    req.flush(mockBooks);
+    httpTestingController.verify();
+  });
+  it('should the all the books as result when no image link in books', () => {
+    const mockBooks = {
+        items: [
+          {
+            id: '1',
+            volumeInfo:{
+            title: 'Angular',
+            description: 'desc1',
+            authors: 'author1',
+            ratingsCount: '5',
+            publisher: 'pub1',
+            pageCount: '10',
+            language: 'en',
+            }
+          },
+        ],
+      };
 
     service.getBooksByName('angular').subscribe((results) => {
       expect(mockBooks).toBe(results);

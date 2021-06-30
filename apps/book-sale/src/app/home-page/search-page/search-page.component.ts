@@ -51,7 +51,7 @@ export class SearchPageComponent implements OnInit, OnDestroy {
     const item: Book[] = [];
     item.push(this.items[id]);
     this.booksService.books$.next(item);
-    this.router.navigate(['/home//books']);
+    this.router.navigate(['/home/books']);
   }
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => {

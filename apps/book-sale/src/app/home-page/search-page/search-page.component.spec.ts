@@ -49,6 +49,15 @@ describe('SearchPageComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  it('search book based on inital loading',()=>{
+    bookService.setSearchKeyWord("Angular");
+    spyOn(bookService, 'getBooksByName').and.returnValue(of(mockBooks));
+    component.ngOnInit();
+    const searchWord = component.searchForm.controls.searchWord;
+    expect(searchWord.value).toEqual('Angular');
+    expect(bookService.getBooksByName).toBeTruthy();
+  })
   it('form invalid when empty', () => {
     expect(component.searchForm.valid).toBeFalsy();
   });
@@ -88,5 +97,16 @@ describe('SearchPageComponent', () => {
     component.onSubmit();
 
     expect(bookService.getBooksByName).toBeTruthy();
+  });
+
+  it('getBookDetails', () => {
+    spyOn(bookService, 'getBooksByName').and.returnValue(of(mockBooks));
+    spyOn(bookService, 'setSearchKeyWord').and.returnValue(undefined);
+    component.searchForm.setValue({ searchWord: 'Angular' });
+
+    component.getBookDetails(0);
+
+    expect(bookService.getBooksByName).toBeTruthy();
+
   });
 });
