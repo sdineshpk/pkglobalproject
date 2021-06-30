@@ -7,7 +7,7 @@ export interface MenuItem {
 }
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'pkglobal-app-home-page',
   templateUrl: './home-page.component.html',
   styleUrls: ['./home-page.component.scss']
 })

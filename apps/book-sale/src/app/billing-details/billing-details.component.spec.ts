@@ -13,7 +13,6 @@ import { BillingDetailsComponent } from './billing-details.component';
 describe('BillingDetailsComponent', () => {
   let component: BillingDetailsComponent;
   let fixture: ComponentFixture<BillingDetailsComponent>;
-  let cartService: CartService;
   let mycollectionService: CollectionService;
 
   beforeEach(async () => {
@@ -29,7 +28,6 @@ describe('BillingDetailsComponent', () => {
   });
 
   beforeEach(() => {
-    cartService = TestBed.inject(CartService);
     mycollectionService = TestBed.inject(CollectionService);
     fixture = TestBed.createComponent(BillingDetailsComponent);
     component = fixture.componentInstance;

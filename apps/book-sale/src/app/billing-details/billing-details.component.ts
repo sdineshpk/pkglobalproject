@@ -13,7 +13,7 @@ import { Subscription } from 'rxjs';
 import { CollectionModule } from '../collection/collection.model';
 
 @Component({
-  selector: 'app-billing-details',
+  selector: 'pkglobal-app-billing-details',
   templateUrl: './billing-details.component.html',
   styleUrls: ['./billing-details.component.scss']
 })

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BooksService } from '../../books.service';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -6,11 +6,11 @@ import { Book } from '../../book.model';
 import { Subscription } from 'rxjs';
 
 @Component({
-  selector: 'app-search-page',
+  selector: 'pkglobal-app-search-page',
   templateUrl: './search-page.component.html',
   styleUrls: ['./search-page.component.scss']
 })
-export class SearchPageComponent implements OnInit {
+export class SearchPageComponent implements OnInit,OnDestroy {
   searchWord = '';
   items: Book[] = [];
   subscriptions: Subscription[] = [];

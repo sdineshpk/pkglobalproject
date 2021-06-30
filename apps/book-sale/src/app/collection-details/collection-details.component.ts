@@ -3,7 +3,7 @@ import { CollectionModule } from '../collection/collection.model';
 import { CollectionService } from '../collection.service';
 
 @Component({
-  selector: 'app-collection-details',
+  selector: 'pkglobal-app-collection-details',
   templateUrl: './collection-details.component.html',
   styleUrls: ['./collection-details.component.scss']
 })

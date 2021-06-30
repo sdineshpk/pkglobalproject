@@ -7,7 +7,7 @@ import { CartService } from '../cart.service';
 import { CollectionService } from '../collection.service';
 
 @Component({
-  selector: 'app-book-details',
+  selector: 'pkglobal-app-book-details',
   templateUrl: './book-details.component.html',
   styleUrls: ['./book-details.component.scss']
 })

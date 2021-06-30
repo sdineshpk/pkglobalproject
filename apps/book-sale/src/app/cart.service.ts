@@ -7,8 +7,7 @@ import { Book } from './book.model';
 export class CartService {
 
   cartItems: Book[] = [];
-
-  constructor() {}
+  
   getCartItems(): Book[] {
     return this.cartItems;
   }
