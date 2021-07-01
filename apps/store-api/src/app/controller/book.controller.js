@@ -8,9 +8,6 @@ async function getBookListByName(req,res) {
     var books = [];
 
     https.get(url, function (response) {
-    //   if (response.statusCode !== 200) {
-    //     res.status(400).send({message:'Invalid input'})
-    //   }
       response.on("data", function (data) {
         body += data;
       });
@@ -23,7 +20,7 @@ async function getBookListByName(req,res) {
             books.push({
               id: item.id,
               title: item.volumeInfo.title,
-              imageLink: item.volumeInfo?.imageLinks?.thumbnail,
+              imageLink: item.volumeInfo.imageLinks?.thumbnail,
               description: item.volumeInfo.description,
               authors: item.volumeInfo.authors,
               ratingsCount: item.volumeInfo.ratingsCount,

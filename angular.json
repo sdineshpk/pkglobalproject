@@ -255,7 +255,7 @@
           "outputs": ["{options.outputPath}"],
           "options": {
             "outputPath": "dist/apps/store-api",
-            "main": "apps/store-api/src/main.js",
+            "main": "apps/store-api/src/app.js",
             "tsConfig": "apps/store-api/tsconfig.app.json",
             "assets": ["apps/store-api/src/assets"]
           },
