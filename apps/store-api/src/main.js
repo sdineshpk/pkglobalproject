@@ -1,8 +1,9 @@
 const express=require('express');
 const app=express();
-const bookCtrl=require('./app/controller/book.controller');
+const routes = require('../src/app/routes/app.routes');
 
-app.get('/api/books/:searchword', bookCtrl.getBookListByName);
+//  Connect all our routes to our application
+app.use('/', routes);
 
 const port = process.env.port || 3333;
 const server = app.listen(port, () => {
