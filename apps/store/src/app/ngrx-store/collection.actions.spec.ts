@@ -19,6 +19,6 @@ describe('CollectionActions', () => {
   });
   it('should create AddCollection Action', () => {
     const action = new collectionActions.AddCollection(collection);
-    expect(action.type).toBeTruthy(collectionActions.ADD_COLLECTION);
+    expect(action.type).toEqual(collectionActions.ADD_COLLECTION);
   });
 });

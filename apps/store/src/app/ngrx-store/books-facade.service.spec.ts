@@ -8,11 +8,13 @@ import { Book } from '../book.model';
 import { BooksFacadeService } from './books-facade.service';
 import { CartEffects } from './cart.effects';
 import * as cartActions from './cart.actions';
+import { Collection } from '../collection.model';
 
 describe('BooksFacadeService', () => {
   let service: BooksFacadeService;
   let store: Store<fromApp.AppState>;
   let book: Book;
+  let collection:Collection;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -36,6 +38,16 @@ describe('BooksFacadeService', () => {
       pageCount: '10',
       language: 'en',
     };
+    collection ={
+      title: 'Angular',
+      imgLink: '/',
+      description: 'desc1',
+      authors: 'author1',    
+      name: 'test',
+      email: 'test@email.com',
+      phone: 1221321,
+      address: 'sd'
+    }
   });
   it('should be created', () => {
     expect(service).toBeTruthy();
@@ -68,6 +80,29 @@ describe('BooksFacadeService', () => {
     service.deleteItem('1');
     store.select('cart').subscribe((state) => {
       expect(state.cartItems.length).toEqual(0);
+    });
+  });
+  it('should clear items from cart items in store', async () => {
+    store.dispatch(new cartActions.AddCartItem(book));
+
+    service.clearItems();
+    store.select('cart').subscribe((state) => {
+      expect(state.cartItems.length).toEqual(0);
+    });
+  });
+  it('should add book in collection using store', async () => {
+    //store.dispatch(new cartActions.AddCartItem(book));
+
+    service.addBook(book);
+    store.select('collection').subscribe((state) => {
+      expect(state.collections.length).toEqual(1);
+    });
+  });
+  it('should add collection using store', async () => {
+    service.addBook(book);
+    service.addCollection(collection);
+    store.select('collection').subscribe((state) => {
+      expect(state.collections.length).toEqual(1);
     });
   });
 });

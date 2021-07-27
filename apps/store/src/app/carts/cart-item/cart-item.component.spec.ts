@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { RouterModule } from '@angular/router';
-import { StoreModule } from '@ngrx/store';
+import {  StoreModule } from '@ngrx/store';
 import { Book } from '../../book.model';
 import { BooksFacadeService } from '../../ngrx-store/books-facade.service';
 
@@ -9,6 +9,7 @@ import * as fromApp from '../../ngrx-store/app.reducer';
 import { EffectsModule } from '@ngrx/effects';
 import { CartEffects } from '../../ngrx-store/cart.effects';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { APP_BASE_HREF } from '@angular/common';
 
 describe('CartItemComponent', () => {
   let component: CartItemComponent;
@@ -26,7 +27,7 @@ describe('CartItemComponent', () => {
         EffectsModule.forRoot([CartEffects]),
       ],
 
-      providers: [BooksFacadeService],
+      providers: [BooksFacadeService,{provide: APP_BASE_HREF, useValue : '/' }],
     }).compileComponents();
     bookService = TestBed.inject(BooksFacadeService);
   });
@@ -65,19 +66,18 @@ describe('CartItemComponent', () => {
     expect(component).toBeTruthy();
   });
   it('should have 0 cartitems to start', () => {
-    component.cartItems$.subscribe((result) => {
-      expect(result.length).toEqual(0);
-    });
+    //component.cartItems$.subscribe((result:Book[]) => {
+      expect(component.cartItems$.length).toEqual(0);
+    //});
   });
   it('should delete an item from  cartitems when delteItem is called', () => {
     bookService.addCartItem(books[0]);
     bookService.addCartItem(books[1]);
 
     component.deleteItem('1');
-
-    component.cartItems$.subscribe((result) => {
+    bookService.getAllCartItems$.subscribe((result:Book[])=>{
       expect(result.length).toEqual(1);
-    });
+    })
   });
   it('should not delete an item from  cartitems when delteItem is called with wrong id', () => {
     bookService.addCartItem(books[0]);
@@ -85,8 +85,8 @@ describe('CartItemComponent', () => {
 
     component.deleteItem('3');
 
-    component.cartItems$.subscribe((result) => {
+    bookService.getAllCartItems$.subscribe((result:Book[])=>{
       expect(result.length).toEqual(2);
-    });
+    })
   });
 });

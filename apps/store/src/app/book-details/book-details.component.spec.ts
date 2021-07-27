@@ -61,4 +61,25 @@ describe('BookDetailsComponent', () => {
       expect(result.length).toEqual(1);
     });
   });
+
+  it('should buy item after added to the cart when buyNow is called', () => {
+    book = {
+      id: '1',
+      title: 'Angular',
+      imageLink: '/',
+      description: 'desc1',
+      authors: 'author1',
+      ratingsCount: '5',
+      publisher: 'pub1',
+      pageCount: '10',
+      language: 'en',
+    };
+    component.book = book;
+
+    component.buyNow();
+
+    bookService.getAllCartItems$.subscribe((result) => {
+      expect(result.length).toEqual(1);
+    });
+  });
 });

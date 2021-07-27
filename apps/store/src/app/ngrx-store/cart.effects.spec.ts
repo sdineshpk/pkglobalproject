@@ -6,13 +6,15 @@ import * as CartActions from './cart.actions';
 import * as cartReducer from '../ngrx-store/cart.reducer';
 import { CartEffects } from '../ngrx-store/cart.effects';
 import { Observable, of } from 'rxjs';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { HttpClient } from '@angular/common/http';
+import { BooksFacadeService } from './books-facade.service';
 
 describe('CartEffects', () => {
   let actions$: Observable<Action>;
   let cartEffects: CartEffects;
-  let httpClient: HttpClient;
+  //let httpClient: HttpTestingController;
+  let service: BooksFacadeService;
 
   let initialState: cartReducer.State;
   const mockBooks = [
@@ -29,21 +31,24 @@ describe('CartEffects', () => {
     },
   ];
   beforeEach(() => {
-    TestBed.configureTestingModule({
+   TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
       providers: [
         CartEffects,
         provideMockStore(),
         provideMockActions(() => actions$),
-        {
-          provide: HttpClient,
-          useValue: jasmine.createSpyObj('HttpClient', ['get']),
-        },
+        HttpClient
+        // {
+        //   provide: HttpClient,
+        //   useValue: jasmine.createSpyObj('HttpClient', ['get']),
+        // },
+        //{ provide: HttpClient, useValue: HttpClient }
       ],
     });
 
     cartEffects = TestBed.inject(CartEffects);
-    httpClient = TestBed.inject(HttpClient);
+    service = TestBed.inject(BooksFacadeService);
+   // httpClient = TestBed.inject(HttpTestingController);
   });
   beforeEach(() => {
     initialState = cartReducer.initialState;
@@ -56,17 +61,18 @@ describe('CartEffects', () => {
   it('should create cartEffects ', () => {
     expect(cartEffects).toBeTruthy();
   });
-  it('should dispatch AddBooks action when getBooksByName action is dispatched', () => {
+  it('should dispatch AddBooks action when getBooksByName action is dispatched', async () => {
     const action = new CartActions.GetBooksByName('Angular');
     const state = cartReducer.cartReducer(initialState, action);
     expect(state.items.length).toEqual(0);
 
-    httpClient.get.and.returnValue(of(mockBooks));
+    //httpClient.get.and.returnValue(of(mockBooks));
+    //jest.spyOn(service,'getBooksByName').mockImplementation(()=>of(mockBooks));
     actions$ = of({ type: CartActions.GET_BOOKSBYNAME, payload: 'Angular' });
-
-    cartEffects.getBooksByName$.subscribe(() => {
+    cartEffects.getBooksByName$.subscribe((res) => {
       expect(action.type).toBe(CartActions.GET_BOOKSBYNAME);
       expect(action.payload).toEqual('Angular');
     });
+    
   });
 });

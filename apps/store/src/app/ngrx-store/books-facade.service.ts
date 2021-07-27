@@ -18,7 +18,6 @@ export class BooksFacadeService {
     (state) => state.cart.items[state.cart.selectedId]
   );
   isCart$ = this.store.select((state) => state.cart.isCart);
-  searchWord$ = this.store.select((state) => state.cart.searchWord);
   getRecentSearWords$ = this.store.select(
     (state) => state.cart.recentSearchWords
   );

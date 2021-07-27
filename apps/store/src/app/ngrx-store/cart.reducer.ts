@@ -9,6 +9,7 @@ export interface State {
   selectedId: number;
   recentSearchWords: string[];
   book: Book;
+  error:string | null;
 }
 
 export const initialState: State = {
@@ -29,16 +30,14 @@ export const initialState: State = {
     pageCount: '',
     language: '',
   },
+  error:null
 };
 
 export function cartReducer(
   state: State = initialState,
   action: CartActions.CartActions | any
 ): State {
-  const searchWord = action.payload.trim();
-  const searchWords = [...state.recentSearchWords, searchWord];
-  // Delete searchword if it already exists without changing last item which will be accessed in search comp
-  const index = searchWords.findIndex((value) => value === searchWord);
+  let searchWords,index;
   switch (action.type) {
     case CartActions.ADD_CARTITEM:
       return {
@@ -81,6 +80,10 @@ export function cartReducer(
         selectedId: action.payload,
       };
     case CartActions.RECENT_SEARCHWORDS:
+      state.searchWord = action.payload.trim();
+      searchWords = [...state.recentSearchWords, state.searchWord];
+    // Delete searchword if it already exists without changing last item which will be accessed in search comp
+    index = searchWords.findIndex((value) => value === state.searchWord);
       if (index !== searchWords.length - 1) {
         searchWords.splice(index, 1);
       }
