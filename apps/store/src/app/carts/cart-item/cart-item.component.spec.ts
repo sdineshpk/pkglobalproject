@@ -70,22 +70,22 @@ describe('CartItemComponent', () => {
       expect(component.cartItems$.length).toEqual(0);
     //});
   });
-  it('should delete an item from  cartitems when delteItem is called', () => {
+  it('should delete an item from  cartitems when delteItem is called', async () => {
     bookService.addCartItem(books[0]);
     bookService.addCartItem(books[1]);
 
     component.deleteItem('1');
-    bookService.getAllCartItems$.subscribe((result:Book[])=>{
+    await bookService.getAllCartItems$.subscribe((result:Book[])=>{
       expect(result.length).toEqual(1);
     })
   });
-  it('should not delete an item from  cartitems when delteItem is called with wrong id', () => {
+  it('should not delete an item from  cartitems when delteItem is called with wrong id', async () => {
     bookService.addCartItem(books[0]);
     bookService.addCartItem(books[1]);
 
     component.deleteItem('3');
 
-    bookService.getAllCartItems$.subscribe((result:Book[])=>{
+    await bookService.getAllCartItems$.subscribe((result:Book[])=>{
       expect(result.length).toEqual(2);
     })
   });

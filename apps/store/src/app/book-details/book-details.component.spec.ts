@@ -1,6 +1,6 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { StoreModule } from '@ngrx/store';
 import { Book } from '../book.model';
@@ -16,6 +16,7 @@ describe('BookDetailsComponent', () => {
   let fixture: ComponentFixture<BookDetailsComponent>;
   let book: Book;
   let bookService: BooksFacadeService;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -29,6 +30,7 @@ describe('BookDetailsComponent', () => {
       ],
       providers: [],
     }).compileComponents();
+    router = TestBed.inject(Router);
   });
 
   beforeEach(() => {
@@ -41,7 +43,7 @@ describe('BookDetailsComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
-  it('should add item to the cart when addToCart is called', () => {
+  it('should add item to the cart when addToCart is called', async () => {
     book = {
       id: '1',
       title: 'Angular',
@@ -57,12 +59,13 @@ describe('BookDetailsComponent', () => {
 
     component.addToCart();
 
-    bookService.getAllCartItems$.subscribe((result) => {
+    await bookService.getAllCartItems$.subscribe((result) => {
       expect(result.length).toEqual(1);
     });
   });
 
-  it('should buy item after added to the cart when buyNow is called', () => {
+  it('should buy item after added to the cart when buyNow is called', async () => {
+    const navigateSpy = spyOn(router, 'navigate');
     book = {
       id: '1',
       title: 'Angular',
@@ -78,8 +81,9 @@ describe('BookDetailsComponent', () => {
 
     component.buyNow();
 
-    bookService.getAllCartItems$.subscribe((result) => {
-      expect(result.length).toEqual(1);
-    });
+    await bookService.getBookInCollection$.subscribe((result) => {
+      expect(result).toEqual(book);
+    });    
+    expect(navigateSpy).toHaveBeenCalledWith(["/billingpage"]);
   });
 });
