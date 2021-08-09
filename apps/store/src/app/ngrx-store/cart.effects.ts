@@ -34,7 +34,7 @@ export class CartEffects {
               return new cartActions.AddBooks({ books });
             }),
             catchError((errorRes) => {
-              return of(errorRes);
+              return of(new cartActions.AddBooksFailure(errorRes));
             })
           );
       })

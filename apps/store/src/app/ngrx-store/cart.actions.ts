@@ -6,6 +6,7 @@ export const DELETE_CARTITEM = '[Cart] DELETE_CARTITEM';
 export const CLEAR_CART = '[Cart] CLEAR_CART';
 export const IS_CART = '[Cart] IS_CART';
 export const ADD_BOOKS = '[Cart] ADD_BOOKS';
+export const ADD_BOOKS_FAILURE = '[Cart] ADD_BOOKS_FAILURE';
 export const ADD_BOOK = '[Cart] ADD_BOOK';
 export const SELECTED_ID = '[Cart] SELECTED_ID';
 export const RECENT_SEARCHWORDS = '[Cart] RECENT SEARCH WORDS';
@@ -37,6 +38,10 @@ export class GetBooksByName implements Action {
 export class AddBooks implements Action {
   readonly type = ADD_BOOKS;
   constructor(public payload: { books: Book[] }) {}
+}
+export class AddBooksFailure implements Action {
+  readonly type = ADD_BOOKS_FAILURE;
+  constructor(public payload:string) {}
 }
 export class SelectedId implements Action {
   readonly type = SELECTED_ID;

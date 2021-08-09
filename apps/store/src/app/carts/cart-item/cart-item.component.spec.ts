@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import {  StoreModule } from '@ngrx/store';
 import { Book } from '../../book.model';
 import { BooksFacadeService } from '../../ngrx-store/books-facade.service';
@@ -16,6 +16,7 @@ describe('CartItemComponent', () => {
   let fixture: ComponentFixture<CartItemComponent>;
   let books: Book[];
   let bookService: BooksFacadeService;
+  let router: Router;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
@@ -30,6 +31,7 @@ describe('CartItemComponent', () => {
       providers: [BooksFacadeService,{provide: APP_BASE_HREF, useValue : '/' }],
     }).compileComponents();
     bookService = TestBed.inject(BooksFacadeService);
+    router = TestBed.inject(Router);
   });
 
   beforeEach(() => {
@@ -88,5 +90,17 @@ describe('CartItemComponent', () => {
     await bookService.getAllCartItems$.subscribe((result:Book[])=>{
       expect(result.length).toEqual(2);
     })
+  });
+
+  it('should proceed to checkout page', async () => {
+    const navigateSpy = spyOn(router, 'navigate');
+    bookService.addCartItem(books[0]);
+
+    component.proceedToCheckout();
+
+    await bookService.isCart$.subscribe((result)=>{
+      expect(result).toEqual(true);
+    });
+    expect(navigateSpy).toHaveBeenCalledWith(["/billingpage"]);
   });
 });

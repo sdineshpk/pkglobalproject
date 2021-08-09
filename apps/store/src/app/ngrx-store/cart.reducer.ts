@@ -68,11 +68,18 @@ export function cartReducer(
       return {
         ...state,
         items: action.payload.books,
+        error:null
+      };
+    case CartActions.ADD_BOOKS_FAILURE:
+      return {
+        ...state,
+        error: action.payload
       };
     case CartActions.ADD_BOOK:
       return {
         ...state,
         book: action.payload,
+        error:null
       };
     case CartActions.SELECTED_ID:
       return {

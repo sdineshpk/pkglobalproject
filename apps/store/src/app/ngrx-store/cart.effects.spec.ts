@@ -75,4 +75,19 @@ describe('CartEffects', () => {
     });
     
   });
+
+  it('should Return  AddBooksFailure action when getBooksByName action is dispatched', async () => {
+    const action = new CartActions.GetBooksByName('Angular');
+    const state = cartReducer.cartReducer(initialState, action);
+    expect(state.items.length).toEqual(0);
+
+    actions$ = of({ type: CartActions.GET_BOOKSBYNAME, payload: 'Angular' });
+    await cartEffects.getBooksByName$.subscribe((res) => {      
+      expect(action.payload).toEqual('Angular');
+    },(err)=>{
+      expect(action.type).toBe(CartActions.GET_BOOKSBYNAME);
+      expect(action.payload).toEqual(err);
+    });
+    
+  });
 });

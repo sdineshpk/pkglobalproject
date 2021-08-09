@@ -28,6 +28,10 @@ describe('CartActions', () => {
     const action = new cartActions.AddBooks({books:[]});
     expect(action.type).toEqual(cartActions.ADD_BOOKS);
   });
+  it('should create cartActios- AddBooksFailure', () => {
+    const action = new cartActions.AddBooksFailure("");
+    expect(action.type).toEqual(cartActions.ADD_BOOKS_FAILURE);
+  });
   it('should create cartActios- SelectedId', () => {
     const action = new cartActions.SelectedId(0);
     expect(action.type).toEqual(cartActions.SELECTED_ID);

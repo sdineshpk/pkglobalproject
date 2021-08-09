@@ -62,6 +62,17 @@ describe('SearchComponent', () => {
   it('form invalid when empty', () => {
     expect(component.searchForm.valid).toBeFalsy();
   });
+
+  it('init function with search word', async () => {
+    spyOn(bookService, 'getBooksByName').and.returnValue(mockBooks);
+    bookService.getBooksByName('Angular');
+    await bookService.getRecentSearWords$.subscribe(result=>{
+      console.log(result);
+    })
+    component.searchWord="Angular";
+    component.ngOnInit();
+    //expect(bookService.getBooksByName).toHaveBeenCalled();
+  });
   it('form valid when non empty', () => {
     component.searchForm.setValue({ searchWord: 'Angular' });
     expect(component.searchForm.valid).toBeTruthy();

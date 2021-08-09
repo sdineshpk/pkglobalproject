@@ -17,11 +17,13 @@ import { BillingPageComponent } from './billing-page.component';
 import { EffectsModule } from '@ngrx/effects';
 import { CartEffects } from '../ngrx-store/cart.effects';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { Book } from '../book.model';
 
 describe('BillingPageComponent', () => {
   let component: BillingPageComponent;
   let fixture: ComponentFixture<BillingPageComponent>;
   let bookService: BooksFacadeService;
+  let book: Book;
 
   beforeEach(() => {
     TestBed.configureTestingModule({
@@ -52,6 +54,60 @@ describe('BillingPageComponent', () => {
   it('should be called onSubmit', () => {
     spyOn(bookService, 'addCollection').and.returnValue(undefined);
     component.isCart = false;
+    component.billingForm ==
+      new FormGroup({
+        name: new FormControl('name', Validators.required),
+        email: new FormControl('s@g.com', Validators.required),
+        phone: new FormControl(0, Validators.required),
+        address: new FormControl('address', Validators.required),
+      });
+    component.onSubmit(component.billingForm);
+
+    expect(bookService.addCollection).toHaveBeenCalled();
+  });
+
+  it('should be called onSubmit with cart true', () => {
+    spyOn(bookService, 'addCollection').and.returnValue(undefined);
+    component.isCart = true;
+    book = {
+      id: '1',
+      title: 'Angular',
+      imageLink: '/',
+      description: 'desc1',
+      authors: 'author1',
+      ratingsCount: '5',
+      publisher: 'pub1',
+      pageCount: '10',
+      language: 'en',
+    };
+    component.books = [book];
+    component.billingForm ==
+      new FormGroup({
+        name: new FormControl('name', Validators.required),
+        email: new FormControl('s@g.com', Validators.required),
+        phone: new FormControl(0, Validators.required),
+        address: new FormControl('address', Validators.required),
+      });
+    component.onSubmit(component.billingForm);
+
+    expect(bookService.addCollection).toHaveBeenCalled();
+  });
+
+  it('should be called onSubmit with cart true for empty book list', () => {
+    spyOn(bookService, 'addCollection').and.returnValue(undefined);
+    component.isCart = true;
+    book = {
+      id: '1',
+      title: '',
+      imageLink: '',
+      description: '',
+      authors: '',
+      ratingsCount: '5',
+      publisher: 'pub1',
+      pageCount: '10',
+      language: 'en',
+    };
+    component.books = [book];
     component.billingForm ==
       new FormGroup({
         name: new FormControl('name', Validators.required),

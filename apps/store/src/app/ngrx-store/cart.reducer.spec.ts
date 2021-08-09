@@ -96,4 +96,9 @@ describe('CartReducer', () => {
     expect(state.items.length).toEqual(2);
     expect(state.items).toEqual(bookList.books);
   });
+  it('should add books for failure case to store Cart', () => {
+    const action = new CartActions.AddBooksFailure("Not Found")
+    const state = cartReducer.cartReducer(initialState, action);
+    expect(state.error).toEqual("Not Found");
+  });
 });
