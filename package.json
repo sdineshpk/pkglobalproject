@@ -43,7 +43,9 @@
     "@ngrx/effects": "^12.0.0",
     "@ngrx/store": "^12.0.0",
     "@nrwl/angular": "12.3.6",
+    "@types/mongoose": "^5.11.97",
     "express": "^4.17.1",
+    "mongodb": "^4.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.11.4"

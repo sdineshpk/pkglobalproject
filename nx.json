@@ -19,6 +19,9 @@
     }
   },
   "projects": {
+    "book-api": {
+      "tags": []
+    },
     "book-sale": {
       "tags": []
     },
