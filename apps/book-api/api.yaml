@@ -995,8 +995,8 @@ components:
       type: object
       properties:
         review_id:
-          type: integer
-          example: 768
+          type: string
+          example: string
         reviwer:
           type: string
           example: Krish
@@ -1019,7 +1019,7 @@ components:
             type: object
           example:
             - {
-                "review_id": 768,
+                "review_id": "32432434",
                 "reviwer": "Krish",
                 "message": "This is indeed an amazing book."
               }

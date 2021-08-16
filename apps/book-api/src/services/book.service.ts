@@ -1,8 +1,8 @@
-import Book from "../models/book.model";
+import {Book} from "../models/book.model";
 import { Request, Response } from "express";
-import {getLogger} from 'log4js';
+import * as log4js from 'log4js';
 
-const log = getLogger("book");
+const log = log4js.getLogger("book");
 
 export const allBooks = (req: Request, res: Response) => {
     log.debug("Fetch All Books result started");

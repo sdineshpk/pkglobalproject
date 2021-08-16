@@ -7,7 +7,7 @@ const options:mongoose.ConnectOptions={
     useCreateIndex:true
 };
 
-mongoose.connect(uri,options, (err: any) => {
+mongoose.connect(uri,options, (err) => {
   if (err) {
     console.log(err.message);
   } else {
@@ -16,6 +16,7 @@ mongoose.connect(uri,options, (err: any) => {
 });
 
 export interface Reviews extends mongoose.Document {
+    book:string,
     review_id: string;
     reviewer: Array<string>;
     message:string;
@@ -63,5 +64,19 @@ export const BookSchema = new mongoose.Schema({
     }
 });
 
-const Book = mongoose.model<IBook>("Book", BookSchema);
-export default Book;
+export const ReviewSchema = new mongoose.Schema({
+    book: { type: mongoose.Types.ObjectId, ref: 'Book' }, // overriding _id with ObjectId
+    review_id: {
+        type:String,
+        required:true
+    },
+    reviewer: [{type:String,required:true}],
+    message:{
+        type:String,
+        required:true
+    }
+});
+
+export const Book = mongoose.model<IBook>("Book", BookSchema);
+
+export const Reviews = mongoose.model<Reviews>("Reviews", ReviewSchema);
