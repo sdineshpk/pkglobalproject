@@ -45,6 +45,8 @@
     "@nrwl/angular": "12.3.6",
     "@types/mongoose": "^5.11.97",
     "express": "^4.17.1",
+    "express-openapi-validator": "^4.12.15",
+    "log4js": "^6.3.0",
     "mongodb": "^4.0.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",

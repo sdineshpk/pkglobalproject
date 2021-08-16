@@ -65,35 +65,3 @@ export const BookSchema = new mongoose.Schema({
 
 const Book = mongoose.model<IBook>("Book", BookSchema);
 export default Book;
-
-// const bookModel=new mongoose.Schema({
-//     name:{
-//         type:String,
-//         required:true
-//     },
-//     author:[{type:String,required:true}],
-//     price:{
-//         type:String,
-//         required:true
-//     },
-//     reviews:[{
-//         type:mongoose.Schema.Types.ObjectId,
-//         ref: 'Reviews'
-//     }],
-//     publisher:{
-//         publisher_id:{
-//             type:String,
-//             required:true
-//         },
-//         name:{
-//             type:String,
-//             required:true
-//         },
-//         location:{
-//             type:String,
-//             required:true
-//         }
-//     }
-// });
-
-//export const Book=mongoose.model('Book',bookModel);
