@@ -370,6 +370,125 @@
           }
         }
       }
+    },
+    "hotel-app": {
+      "projectType": "application",
+      "root": "apps/hotel-app",
+      "sourceRoot": "apps/hotel-app/src",
+      "prefix": "pkglobal",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "outputs": ["{options.outputPath}"],
+          "options": {
+            "outputPath": "dist/apps/hotel-app",
+            "index": "apps/hotel-app/src/index.html",
+            "main": "apps/hotel-app/src/main.ts",
+            "polyfills": "apps/hotel-app/src/polyfills.ts",
+            "tsConfig": "apps/hotel-app/tsconfig.app.json",
+            "inlineStyleLanguage": "scss",
+            "assets": [
+              "apps/hotel-app/src/favicon.ico",
+              "apps/hotel-app/src/assets"
+            ],
+            "styles": ["apps/hotel-app/src/styles.scss"],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "500kb",
+                  "maximumError": "1mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "2kb",
+                  "maximumError": "4kb"
+                }
+              ],
+              "fileReplacements": [
+                {
+                  "replace": "apps/hotel-app/src/environments/environment.ts",
+                  "with": "apps/hotel-app/src/environments/environment.prod.ts"
+                }
+              ],
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "vendorChunk": true,
+              "extractLicenses": false,
+              "sourceMap": true,
+              "namedChunks": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "hotel-app:build:production"
+            },
+            "development": {
+              "browserTarget": "hotel-app:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "hotel-app:build"
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "apps/hotel-app/src/**/*.ts",
+              "apps/hotel-app/src/**/*.html"
+            ]
+          }
+        },
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/apps/hotel-app"],
+          "options": {
+            "jestConfig": "apps/hotel-app/jest.config.js",
+            "passWithNoTests": true
+          }
+        }
+      }
+    },
+    "hotel-app-e2e": {
+      "root": "apps/hotel-app-e2e",
+      "sourceRoot": "apps/hotel-app-e2e/src",
+      "projectType": "application",
+      "architect": {
+        "e2e": {
+          "builder": "@nrwl/cypress:cypress",
+          "options": {
+            "cypressConfig": "apps/hotel-app-e2e/cypress.json",
+            "tsConfig": "apps/hotel-app-e2e/tsconfig.e2e.json",
+            "devServerTarget": "hotel-app:serve:development"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "hotel-app:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": ["apps/hotel-app-e2e/**/*.{js,ts}"]
+          }
+        }
+      }
     }
   }
 }

@@ -38,6 +38,13 @@
     "store-e2e": {
       "tags": [],
       "implicitDependencies": ["store"]
+    },
+    "hotel-app": {
+      "tags": []
+    },
+    "hotel-app-e2e": {
+      "tags": [],
+      "implicitDependencies": ["hotel-app"]
     }
   }
 }

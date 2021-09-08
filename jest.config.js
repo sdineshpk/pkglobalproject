@@ -4,5 +4,6 @@ module.exports = {
     '<rootDir>/apps/store',
     '<rootDir>/apps/store-api',
     '<rootDir>/apps/book-api',
+    '<rootDir>/apps/hotel-app',
   ],
 };
