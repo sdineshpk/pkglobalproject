@@ -1,0 +1,52 @@
+.menu-list{
+    li{
+        list-style: none;
+        font-size: 14px;
+    
+            color: rgb(49, 34, 190);
+            text-decoration: auto;
+            cursor: pointer;
+            
+        
+        
+    }
+
+    .active{
+        border-bottom: 2px solid  rgb(49, 34, 190);
+        font-weight: bold;
+    }
+}
+
+.content{
+    padding: 0px 40px;
+    .form-group{
+        margin-bottom: 24px;
+        label{
+            font-size: 12px;
+            font-weight:400;
+            color: rgb(78, 65, 187);
+        }
+        .form-control{
+            input[type=date]{
+                width: 200px;
+                height: 30px;
+            }
+            input[type=text]{
+                width: 200px;
+                height: 30px;
+            }
+            select{
+                width: 200px;
+                height: 30px;
+            }
+        }
+        .text-danger{
+            color:red;
+            margin: 0px;
+            font-size: 12px;
+        }
+    }
+    .btn-group{
+        margin-left: 660px;
+    }
+}

@@ -1,0 +1,27 @@
+.navbar{
+    .menu-list{
+        li{
+            list-style: none;
+            font-size: 16px;
+            a{
+                color: #FFF;
+                text-decoration: auto;
+            }
+            
+        }
+
+        .active{
+            border-bottom: 2px solid;
+        }
+    }
+}
+
+header{
+    padding: 0px 15px;
+    background-color:#3122be;
+    color: #FFF;
+    h1{
+        font-size: 3em;
+    margin: 0px;
+    }
+}

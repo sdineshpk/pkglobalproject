@@ -1,0 +1,141 @@
+<div class="menu-list">
+  <ul
+    class="nav navbar-nav"
+    fxLayout="row"
+    fxLayoutGap="32px"
+    fxLayoutAlign="start center"
+  >
+    <li class="active" [class.active]="options==='yourStay'" (click)="options='yourStay';" aria-label="You're stay">You're stay
+    </li>
+    <li [class.active]="options==='guests'" (click)="options='guests';" aria-label="Guests">Guests
+    </li>
+    <li [class.active]="options==='payment'" (click)="options='payment';" aria-label="Payment">Payment
+    </li>
+  </ul>
+</div>
+<div class="content">
+    <div *ngIf="options==='yourStay'">
+        <form [formGroup]="stayFormGroup" fxLayout="row wrap" fxLayoutGap="30px" fxFlex="50"  fxLayoutAlign="space-between">
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label>Check In</label>
+                <div class="form-control">
+                    <input type="date" required formControlName="checkDate" aria-label="Check in date">
+                </div>
+                <div *ngIf="stayFormGroup.controls['checkDate'].invalid && (stayFormGroup.controls['checkDate'].dirty || stayFormGroup.controls['checkDate'].touched)">
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.checkDate?.errors?.required" aria-label="Please select check-in date">Please select check-in date</p>
+                </div>
+            </div>
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label>Check out</label>
+                <div class="form-control">
+                    <input type="date" required formControlName="checkOut" aria-label="Check out date">
+                </div>
+                <div *ngIf="stayFormGroup.controls['checkOut'].invalid && (stayFormGroup.controls['checkOut'].dirty || stayFormGroup.controls['checkOut'].touched)">
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.checkOut?.errors?.required" aria-label="Please select check-out date">Please select check-in date</p>
+                </div>
+            </div>
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label>Room type</label>
+                <div class="form-control">
+                    <select aria-label="select room type" placeholder="Select room type">
+                        <option>Normal</option>
+                        <option>Delux</option>
+                        <option>Super Delux</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label>Person</label>
+                <div class="form-control">
+                    <input type="text" aria-label="select number of persons" placeholder="Select number of persons">
+                </div>
+            </div>
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label>Food service</label>
+                <div class="form-control">
+                    <input type="checkbox" aria-label="Breakfast"> Breakfast
+                    <input type="checkbox" aria-label="Lunch"> Lunch
+                    <input type="checkbox" aria-label="Dinner"> Dinner
+                </div>
+
+            </div>
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label for="pickup">Pickup</label>
+                <div class="form-control" >
+                    <div><input type="radio" value="yes" name="pickup" aria-label="Yes, sure"> Yes, sure</div>
+                    <div><input type="radio" value="no" name="pickup" aria-label="No, I already rented a car"> No, I already rented a car</div>
+                </div>
+            </div>
+            <div class="btn-group">
+                <button class="btn">Next</button>
+            </div>
+        </form>
+    </div>
+    <div *ngIf="options==='guests'">
+        <pkglobal-jw-modal id="custom-modal-1">
+            <div class="model-header">
+                <h1>Guest Info</h1>
+                <button (click)="closeModal('custom-modal-1');">X</button>
+            </div>
+            <form [formGroup]="guestFormGroup" fxLayout="row wrap" fxLayoutGap="30px" fxFlex="50"  fxLayoutAlign="space-between">
+                <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                    <label>First name</label>
+                    <div class="form-control">
+                        <input type="text" required formControlName="firstName" aria-label="Check in date">
+                    </div>
+                    <div *ngIf="guestFormGroup.controls['firstName'].invalid && (guestFormGroup.controls['firstName'].dirty || guestFormGroup.controls['firstName'].touched)">
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.firstName?.errors?.required" aria-label="Please select check-in date">Please select check-in date</p>
+                    </div>
+                </div>
+                <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                    <label>Last name</label>
+                    <div class="form-control">
+                        <input type="date" required formControlName="lastName" aria-label="Check out date">
+                    </div>
+                    <div *ngIf="guestFormGroup.controls['lastName'].invalid && (guestFormGroup.controls['lastName'].dirty || guestFormGroup.controls['lastName'].touched)">
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.lastName?.errors?.required" aria-label="Please select check-out date">Please select check-in date</p>
+                    </div>
+                </div>
+                <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                    <label for="pickup">Gender</label>
+                    <div class="form-control" >
+                        <div><input type="radio" value="male"  formControlName="gender" name="pickup" aria-label="Male"> Male</div>
+                        <div><input type="radio" value="female"  formControlName="gender" name="pickup" aria-label="Female"> Female</div>
+                    </div>
+                </div>
+                <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                    <label>Phone</label>
+                    <div class="form-control">
+                        <input type="text" required formControlName="phone" aria-label="Phone number" placeholder="Phone number">
+                    </div>
+                </div>
+                <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                    <label>Email</label>
+                    <div class="form-control">
+                        <input type="email" required formControlName="email" aria-label="Please provide email id" placeholder="Email">
+                    </div>
+                </div>
+                <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                    <label>Address</label>
+                    <div class="form-control">
+                        <textarea required formControlName="address" aria-label="Enter address details" placeholder="Enter address"></textarea>
+                    </div>
+                </div>
+                <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                    <label>Age</label>
+                    <div class="form-control">
+                        <input required formControlName="age" type="text" aria-label="Enter age" placeholder="Age">
+                    </div>
+                </div>
+                <div class="btn-group">
+                    <button class="btn">Save</button>
+                </div>
+            </form>
+        </pkglobal-jw-modal>
+        <div class="btn-group">
+            <button class="btn" (click)="options='yourStay';">Back</button>
+            <button class="btn" (click)="openModal('custom-modal-1');">Add Guest</button>
+            <button class="btn" (click)="options='payment';">Next</button>            
+        </div>
+    </div>
+</div>
