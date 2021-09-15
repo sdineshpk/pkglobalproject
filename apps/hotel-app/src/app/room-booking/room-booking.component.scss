@@ -48,5 +48,14 @@
     }
     .btn-group{
         margin-left: 660px;
+        .btn{
+            width: 60px;
+            padding: 4px;
+            font-size: 14px;
+        }
+
+        .btn:hover{
+            cursor: pointer;
+        }
     }
 }
