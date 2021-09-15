@@ -5,17 +5,17 @@
     fxLayoutGap="32px"
     fxLayoutAlign="start center"
   >
-    <li class="active" [class.active]="options==='yourStay'" (click)="options='yourStay';" aria-label="You're stay">You're stay
+    <li class="active" [class.active]="options==='yourStay'" aria-label="You're stay">You're stay
     </li>
-    <li [class.active]="options==='guests'" (click)="options='guests';" aria-label="Guests">Guests
+    <li [class.active]="options==='guests'" aria-label="Guests">Guests
     </li>
-    <li [class.active]="options==='payment'" (click)="options='payment';" aria-label="Payment">Payment
+    <li [class.active]="options==='payment'" aria-label="Payment">Payment
     </li>
   </ul>
 </div>
 <div class="content">
     <div *ngIf="options==='yourStay'">
-        <form [formGroup]="stayFormGroup" fxLayout="row wrap" fxLayoutGap="30px" fxFlex="50"  fxLayoutAlign="space-between">
+        <form [formGroup]="stayFormGroup" (ngSubmit)="goToNext()" fxLayout="row wrap" fxLayoutGap="30px" fxFlex="50"  fxLayoutAlign="space-between">
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                 <label>Check In</label>
                 <div class="form-control">
@@ -37,48 +37,66 @@
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                 <label>Room type</label>
                 <div class="form-control">
-                    <select aria-label="select room type" placeholder="Select room type">
-                        <option>Normal</option>
-                        <option>Delux</option>
-                        <option>Super Delux</option>
+                    <select required formControlName="roomType" aria-label="select room type" placeholder="Select room type">
+                        <option value="normal" aria-label="Normal">Normal</option>
+                        <option value="delux" aria-label="delux">Delux</option>
+                        <option value="super-delux" aria-label="Super Delux">Super Delux</option>
                     </select>
+                </div>
+                <div *ngIf="stayFormGroup.controls['roomType'].invalid && (stayFormGroup.controls['roomType'].dirty || stayFormGroup.controls['roomType'].touched)">
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.roomType?.errors?.required" aria-label="Please select room type">Please select room type</p>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                 <label>Person</label>
                 <div class="form-control">
-                    <input type="text" aria-label="select number of persons" placeholder="Select number of persons">
+                    <input type="text" required formControlName="person" aria-label="select number of persons" placeholder="Select number of persons">
+                </div>
+                <div *ngIf="stayFormGroup.controls['person'].invalid && (stayFormGroup.controls['person'].dirty || stayFormGroup.controls['person'].touched)">
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.person?.errors?.required" aria-label="Please enter number of person for stay">Please enter number of person for stay</p>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                 <label>Food service</label>
-                <div class="form-control">
+                <!-- <div class="form-control">
                     <input type="checkbox" aria-label="Breakfast"> Breakfast
                     <input type="checkbox" aria-label="Lunch"> Lunch
                     <input type="checkbox" aria-label="Dinner"> Dinner
+                </div> -->
+                <div class="form-control" fxLayout="row" fxLayoutGap="10px">
+                    <div *ngFor="let data of Data; let i=index">
+                    
+                        <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
+                        {{data.name}}
+                    </div>
                 </div>
-
+                <div>
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.checkArray?.errors?.required" aria-label="Please select food service">Please select food service</p>
+                </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                 <label for="pickup">Pickup</label>
                 <div class="form-control" >
-                    <div><input type="radio" value="yes" name="pickup" aria-label="Yes, sure"> Yes, sure</div>
-                    <div><input type="radio" value="no" name="pickup" aria-label="No, I already rented a car"> No, I already rented a car</div>
+                    <div><input type="radio" required formControlName="pickup"  value="yes" name="pickup" aria-label="Yes, sure"> Yes, sure</div>
+                    <div><input type="radio" required formControlName="pickup"  value="no" name="pickup" aria-label="No, I already rented a car"> No, I already rented a car</div>
+                </div>
+                <div *ngIf="stayFormGroup.controls['pickup'].invalid && (stayFormGroup.controls['pickup'].dirty || stayFormGroup.controls['pickup'].touched)">
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.pickup?.errors?.required" aria-label="Please select pickup service type">Please select pickup service type</p>
                 </div>
             </div>
             <div class="btn-group">
-                <button class="btn" [disabled]="true">Next</button>
+                <button class="btn" [disabled]="stayFormGroup.invalid">Next</button>
             </div>
         </form>
     </div>
     <div *ngIf="options==='guests'">
         <pkglobal-jw-modal id="custom-modal-1">
             <div class="model-header" fxLayout="row" fxLayoutAlign="space-around center">
-                <h1  fxLayoutAlign="start center" style="margin: 0px;">Guest Info</h1>
-                <button (click)="closeModal('custom-modal-1');">X</button>
+                <h2  style="margin: 0px;">Guest Info</h2>
+                <button class="close-btn" (click)="closeModal('custom-modal-1');">X</button>
             </div>
-            <div>
-            <form [formGroup]="guestFormGroup" fxLayout="row wrap" fxLayoutGap="30px" fxFlex="100"  fxLayoutAlign="space-between">
+            <div class="modal-body">
+            <form [formGroup]="guestFormGroup" (ngSubmit)="addGuest()" fxLayout="row wrap" fxLayoutGap="20px" fxFlex="100"  fxLayoutAlign="space-between">
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                     <label>First name</label>
                     <div class="form-control">
@@ -99,9 +117,12 @@
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                     <label for="gender">Gender</label>
-                    <div class="form-control" >
+                    <div class="form-control" fxLayout="row wrap" fxLayoutGap="30px" fxFlex="100"  fxLayoutAlign="space-between">
                         <div><input type="radio" value="male"  formControlName="gender" name="gender" aria-label="Male"> Male</div>
                         <div><input type="radio" value="female"  formControlName="gender" name="gender" aria-label="Female"> Female</div>
+                    </div>
+                    <div *ngIf="guestFormGroup.controls['gender'].invalid && (guestFormGroup.controls['gender'].dirty || guestFormGroup.controls['gender'].touched)">
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.gender?.errors?.required" aria-label="Please select gender">Please select gender</p>
                     </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -109,11 +130,17 @@
                     <div class="form-control">
                         <input type="text" required formControlName="phone" aria-label="Phone number" placeholder="Phone number">
                     </div>
+                    <div *ngIf="guestFormGroup.controls['phone'].invalid && (guestFormGroup.controls['phone'].dirty || guestFormGroup.controls['phone'].touched)">
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.phone?.errors?.required" aria-label="Please enter phone number">Please enter phone number</p>
+                    </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                     <label>Email</label>
                     <div class="form-control">
                         <input type="email" required formControlName="email" aria-label="Please provide email id" placeholder="Email">
+                    </div>
+                    <div *ngIf="guestFormGroup.controls['email'].invalid && (guestFormGroup.controls['email'].dirty || guestFormGroup.controls['email'].touched)">
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.email?.errors?.required" aria-label="Please enter email">Please enter email</p>
                     </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -121,23 +148,37 @@
                     <div class="form-control">
                         <textarea required formControlName="address" aria-label="Enter address details" placeholder="Enter address"></textarea>
                     </div>
+                    <div *ngIf="guestFormGroup.controls['address'].invalid && (guestFormGroup.controls['address'].dirty || guestFormGroup.controls['address'].touched)">
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.address?.errors?.required" aria-label="Please enter address">Please enter address</p>
+                    </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                     <label>Age</label>
                     <div class="form-control">
                         <input required formControlName="age" type="text" aria-label="Enter age" placeholder="Age">
                     </div>
+                    <div *ngIf="guestFormGroup.controls['age'].invalid && (guestFormGroup.controls['age'].dirty || guestFormGroup.controls['age'].touched)">
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.age?.errors?.required" aria-label="Please enter age">Please enter age</p>
+                    </div>
                 </div>
                 <div class="btn-group">
-                    <button class="btn">Save</button>
+                    <button class="btn" [disabled]="guestFormGroup.invalid">Save</button>
                 </div>
             </form>
         </div>
         </pkglobal-jw-modal>
-        <div class="btn-group">
-            <button class="btn" (click)="options='yourStay';">Back</button>
-            <button class="btn" (click)="openModal('custom-modal-1');">Add Guest</button>
-            <button class="btn" (click)="options='payment';">Next</button>            
+        <div class="guest-box" *ngIf="!guestList.length">
+            <p>Add guest(s) to proceed</p>
+        </div>
+        <div class="guest-list" *ngFor="let item of guestList">
+            <label class="guest-name">{{item?.firstName}} {{item?.lastName}}</label>
+            <label class="guest-basic-details">Age: {{item?.age}} <span>Gender: {{item?.gender}}</span></label>
+            <label class="guest-address">Address <span>{{item?.address}}</span></label>
+        </div>
+        <div class="" fxLayout="row" fxLayoutAlign="space-around center">
+            <button class="btn" fxFlex="60px" (click)="backToPrev();">Back</button>
+            <button class="btn" fxFlex="100px" (click)="openModal('custom-modal-1');">Add Guest</button>
+            <button class="btn" fxFlex="60px" (click)="goToNext();">Next</button>            
         </div>
     </div>
 </div>

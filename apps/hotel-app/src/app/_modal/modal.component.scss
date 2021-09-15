@@ -21,9 +21,13 @@ pkglobal-jw-modal {
         .jw-modal-body {
             padding: 20px;
             background: #fff;
+            width: 550px;
 
+            position: absolute;
+            left: calc(60% - 450px);
             /* margin exposes part of the modal background */
             margin: 40px;
+            padding-right: 0px;
         }
     }
 
