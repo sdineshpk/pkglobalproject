@@ -22,7 +22,7 @@
                     <input type="date" required formControlName="checkDate" aria-label="Check in date">
                 </div>
                 <div *ngIf="stayFormGroup.controls['checkDate'].invalid && (stayFormGroup.controls['checkDate'].dirty || stayFormGroup.controls['checkDate'].touched)">
-                    <p class="text-danger" *ngIf="stayFormGroup.controls.checkDate?.errors?.required" aria-label="Please select check-in date">Please select check-in date</p>
+                    <label class="text-danger" *ngIf="stayFormGroup.controls.checkDate?.errors?.required" role="alert" aria-label="Please select check-in date">Please select check-in date</label>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -31,7 +31,7 @@
                     <input type="date" required formControlName="checkOut" aria-label="Check out date">
                 </div>
                 <div *ngIf="stayFormGroup.controls['checkOut'].invalid && (stayFormGroup.controls['checkOut'].dirty || stayFormGroup.controls['checkOut'].touched)">
-                    <p class="text-danger" *ngIf="stayFormGroup.controls.checkOut?.errors?.required" aria-label="Please select check-out date">Please select check-in date</p>
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.checkOut?.errors?.required" role="alert" aria-label="Please select check-out date">Please select check-out date</p>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -44,7 +44,7 @@
                     </select>
                 </div>
                 <div *ngIf="stayFormGroup.controls['roomType'].invalid && (stayFormGroup.controls['roomType'].dirty || stayFormGroup.controls['roomType'].touched)">
-                    <p class="text-danger" *ngIf="stayFormGroup.controls.roomType?.errors?.required" aria-label="Please select room type">Please select room type</p>
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.roomType?.errors?.required" role="alert" aria-label="Please select room type">Please select room type</p>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -53,7 +53,7 @@
                     <input type="text" required formControlName="person" aria-label="select number of persons" placeholder="Select number of persons">
                 </div>
                 <div *ngIf="stayFormGroup.controls['person'].invalid && (stayFormGroup.controls['person'].dirty || stayFormGroup.controls['person'].touched)">
-                    <p class="text-danger" *ngIf="stayFormGroup.controls.person?.errors?.required" aria-label="Please enter number of person for stay">Please enter number of person for stay</p>
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.person?.errors?.required" role="alert" aria-label="Please enter number of person for stay">Please enter number of person for stay</p>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -66,22 +66,24 @@
                 <div class="form-control" fxLayout="row" fxLayoutGap="10px">
                     <div *ngFor="let data of Data; let i=index">
                     
-                        <input type="checkbox" [value]="data.value" (change)="onCheckboxChange($event)" />
+                        <input type="checkbox" [attr.aria-label]="data.name" [value]="data.value" (change)="onCheckboxChange($event)" />
                         {{data.name}}
                     </div>
                 </div>
                 <div>
-                    <p class="text-danger" *ngIf="stayFormGroup.controls.checkArray?.errors?.required" aria-label="Please select food service">Please select food service</p>
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.checkArray?.errors?.required" role="alert" aria-label="Please select food service">Please select food service</p>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
-                <label for="pickup">Pickup</label>
+                <fieldset>
+                <legend><label id="pickup_query">Pickup</label></legend>
                 <div class="form-control" >
-                    <div><input type="radio" required formControlName="pickup"  value="yes" name="pickup" aria-label="Yes, sure"> Yes, sure</div>
-                    <div><input type="radio" required formControlName="pickup"  value="no" name="pickup" aria-label="No, I already rented a car"> No, I already rented a car</div>
+                    <div><input type="radio" required formControlName="pickup" aria-describedby="pickup_query" id="pickup_yes"  value="yes" name="pickup" aria-label="Yes, sure"> <span for="pickup_yes">Yes, sure</span></div>
+                    <div><input type="radio" required formControlName="pickup" aria-describedby="pickup_query" id="pickup_no" value="no" name="pickup" aria-label="No, I already rented a car"> <span for="pickup_no">No, I already rented a car</span></div>
                 </div>
+            </fieldset>
                 <div *ngIf="stayFormGroup.controls['pickup'].invalid && (stayFormGroup.controls['pickup'].dirty || stayFormGroup.controls['pickup'].touched)">
-                    <p class="text-danger" *ngIf="stayFormGroup.controls.pickup?.errors?.required" aria-label="Please select pickup service type">Please select pickup service type</p>
+                    <p class="text-danger" *ngIf="stayFormGroup.controls.pickup?.errors?.required" role="alert" aria-label="Please select pickup service type">Please select pickup service type</p>
                 </div>
             </div>
             <div class="btn-group">
@@ -180,5 +182,54 @@
             <button class="btn" fxFlex="100px" (click)="openModal('custom-modal-1');">Add Guest</button>
             <button class="btn" fxFlex="60px" (click)="goToNext();">Next</button>            
         </div>
+    </div>
+    <div *ngIf="options==='payment'">
+        <!-- <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+            <label for="paymentOption">Choose payment</label>
+            <div class="form-control" fxLayout="row wrap" fxLayoutGap="10px" fxFlex="20"  fxLayoutAlign="start">
+                <div><input type="radio" value="card"  name="paymentOption" aria-label="Credit card"> Credit card</div>
+                <div><input type="radio" value="UPI"  name="paymentOption" aria-label="UPI payment"> UPI payment</div>
+            </div>
+        </div>
+        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+            <label for="paymentOption">Card holder name</label>
+            <div class="form-control">
+                <input type="text" required formControlName="firstName" aria-label="First name">
+            </div>
+            <div *ngIf="guestFormGroup.controls['firstName'].invalid && (guestFormGroup.controls['firstName'].dirty || guestFormGroup.controls['firstName'].touched)">
+                <p class="text-danger" *ngIf="guestFormGroup.controls.firstName?.errors?.required" aria-label="Please enter first name">Please enter first name</p>
+            </div>
+        </div>
+        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+            <label for="paymentOption">Card number</label>
+            <div class="form-control">
+                <input type="text" required formControlName="firstName" aria-label="First name">
+            </div>
+            <div *ngIf="guestFormGroup.controls['firstName'].invalid && (guestFormGroup.controls['firstName'].dirty || guestFormGroup.controls['firstName'].touched)">
+                <p class="text-danger" *ngIf="guestFormGroup.controls.firstName?.errors?.required" aria-label="Please enter first name">Please enter first name</p>
+            </div>
+        </div>
+        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+            <label>Expiration date</label>
+            <div class="form-control">
+                <input type="date" required formControlName="checkDate" aria-label="Check in date">
+            </div>
+            <div *ngIf="stayFormGroup.controls['checkDate'].invalid && (stayFormGroup.controls['checkDate'].dirty || stayFormGroup.controls['checkDate'].touched)">
+                <p class="text-danger" *ngIf="stayFormGroup.controls.checkDate?.errors?.required" aria-label="Please select check-in date">Please select check-in date</p>
+            </div>
+        </div>
+        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+            <label for="paymentOption">CVV</label>
+            <div class="form-control">
+                <input type="text" required formControlName="firstName" aria-label="First name">
+            </div>
+            <div *ngIf="guestFormGroup.controls['firstName'].invalid && (guestFormGroup.controls['firstName'].dirty || guestFormGroup.controls['firstName'].touched)">
+                <p class="text-danger" *ngIf="guestFormGroup.controls.firstName?.errors?.required" aria-label="Please enter first name">Please enter first name</p>
+            </div>
+        </div>
+        <div class="" fxLayout="row" fxLayoutAlign="space-around center">
+            <button class="btn" fxFlex="60px" (click)="backToPrev();">Back</button>
+            <button class="btn" fxFlex="60px" (click)="goToNext();">Proceed</button>            
+        </div> -->
     </div>
 </div>
