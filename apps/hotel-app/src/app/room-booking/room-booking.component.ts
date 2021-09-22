@@ -24,7 +24,7 @@ interface guests {
 })
 export class RoomBookingComponent {
 
-  options="yourStay";
+  options="payment";
   guestList:Array<guests>=[];
   Data: Array<foodService> = [
     { name: 'Breakfast', value: 'breakfast' },
@@ -49,6 +49,14 @@ export class RoomBookingComponent {
   address: [null, Validators.required ],
   age: [null, Validators.required ],
 });
+cardFormGroup: FormGroup=this.fb.group({
+  cardHolderName: [null, Validators.required ],
+  cardNumber: [null, Validators.required ],
+  expirationDate: [null, Validators.required ],
+  CVV: [null, Validators.required ]
+});
+paymentOptions='card';
+checkApprove=false;
 
   constructor(
       private fb: FormBuilder,private modalService: ModalService )
@@ -110,6 +118,10 @@ export class RoomBookingComponent {
       default:
         break;
     }
+  }
+
+  moveToBooking(){
+    this.closeModal('custom-modal-2');
   }
 
 

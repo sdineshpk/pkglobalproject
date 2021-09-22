@@ -22,7 +22,7 @@
                     <input type="date" required formControlName="checkDate" aria-label="Check in date">
                 </div>
                 <div *ngIf="stayFormGroup.controls['checkDate'].invalid && (stayFormGroup.controls['checkDate'].dirty || stayFormGroup.controls['checkDate'].touched)">
-                    <label class="text-danger" *ngIf="stayFormGroup.controls.checkDate?.errors?.required" role="alert" aria-label="Please select check-in date">Please select check-in date</label>
+                    <label class="text-danger" *ngIf="stayFormGroup.controls.checkDate?.errors?.required" aria-live="assertive" role="alert" aria-label="Please select check-in date">Please select check-in date</label>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -183,53 +183,75 @@
             <button class="btn" fxFlex="60px" (click)="goToNext();">Next</button>            
         </div>
     </div>
-    <div *ngIf="options==='payment'">
-        <!-- <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+    <div *ngIf="options==='payment'">        
+        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
             <label for="paymentOption">Choose payment</label>
             <div class="form-control" fxLayout="row wrap" fxLayoutGap="10px" fxFlex="20"  fxLayoutAlign="start">
-                <div><input type="radio" value="card"  name="paymentOption" aria-label="Credit card"> Credit card</div>
-                <div><input type="radio" value="UPI"  name="paymentOption" aria-label="UPI payment"> UPI payment</div>
+                <div><input type="radio" value="card" [(ngModel)]="paymentOptions"  name="paymentOption" aria-label="Credit card"> Credit card</div>
+                <div><input type="radio" value="UPI" [(ngModel)]="paymentOptions" name="paymentOption" aria-label="UPI payment"> UPI payment</div>
             </div>
         </div>
-        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
-            <label for="paymentOption">Card holder name</label>
-            <div class="form-control">
-                <input type="text" required formControlName="firstName" aria-label="First name">
+        <div>
+        <form [formGroup]="cardFormGroup" (ngSubmit)="goToNext()" fxLayout="row wrap" fxLayoutGap="30px" fxFlex="100"  fxLayoutAlign="space-between">
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label for="paymentOption">Card holder name</label>
+                <div class="form-control">
+                    <input type="text" required formControlName="cardHolderName" aria-label="Card holder name">
+                </div>
+                <div *ngIf="cardFormGroup.controls['cardHolderName'].invalid && (cardFormGroup.controls['cardHolderName'].dirty || cardFormGroup.controls['cardHolderName'].touched)">
+                    <p class="text-danger" *ngIf="cardFormGroup.controls.cardHolderName?.errors?.required" aria-label="Please enter Card holder name">Please enter Card holder name</p>
+                </div>
             </div>
-            <div *ngIf="guestFormGroup.controls['firstName'].invalid && (guestFormGroup.controls['firstName'].dirty || guestFormGroup.controls['firstName'].touched)">
-                <p class="text-danger" *ngIf="guestFormGroup.controls.firstName?.errors?.required" aria-label="Please enter first name">Please enter first name</p>
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label for="paymentOption">Card number</label>
+                <div class="form-control">
+                    <input type="text" required formControlName="cardNumber" aria-label="Card number">
+                </div>
+                <div *ngIf="cardFormGroup.controls['cardNumber'].invalid && (cardFormGroup.controls['cardNumber'].dirty || cardFormGroup.controls['cardNumber'].touched)">
+                    <p class="text-danger" *ngIf="cardFormGroup.controls.cardNumber?.errors?.required" aria-label="Please enter Card number">Please enter Card number</p>
+                </div>
             </div>
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label>Expiration date</label>
+                <div class="form-control">
+                    <input type="text" required placeholder="mm/yy" formControlName="expirationDate" aria-label="Expiration date">
+                </div>
+                <div *ngIf="cardFormGroup.controls['expirationDate'].invalid && (cardFormGroup.controls['expirationDate'].dirty || cardFormGroup.controls['expirationDate'].touched)">
+                    <p class="text-danger" *ngIf="cardFormGroup.controls.expirationDate?.errors?.required" aria-label="Please enter Expiration date">Please enter Expiration date</p>
+                </div>
+            </div>
+            <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                <label for="paymentOption">CVV</label>
+                <div class="form-control">
+                    <input type="text" required formControlName="CVV" aria-label="CVV">
+                </div>
+                <div *ngIf="cardFormGroup.controls['CVV'].invalid && (cardFormGroup.controls['CVV'].dirty || cardFormGroup.controls['CVV'].touched)">
+                    <p class="text-danger" *ngIf="cardFormGroup.controls.CVV?.errors?.required" aria-label="Please enter CVV">Please enter CVV</p>
+                </div>
+            </div>
+        </form>
         </div>
-        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
-            <label for="paymentOption">Card number</label>
-            <div class="form-control">
-                <input type="text" required formControlName="firstName" aria-label="First name">
+        <pkglobal-jw-modal id="custom-modal-2">
+            <div class="model-header" fxLayout="row" fxLayoutAlign="space-around center">
+                <h2  style="margin: 0px;">Booking Confirmation</h2>
+                <button class="close-btn" (click)="closeModal('custom-modal-2');">X</button>
             </div>
-            <div *ngIf="guestFormGroup.controls['firstName'].invalid && (guestFormGroup.controls['firstName'].dirty || guestFormGroup.controls['firstName'].touched)">
-                <p class="text-danger" *ngIf="guestFormGroup.controls.firstName?.errors?.required" aria-label="Please enter first name">Please enter first name</p>
-            </div>
+            <div class="modal-body">
+                <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+                    <label for="checkApprove">Our recption will approve your reservation in few days</label>
+                    <div class="form-control" fxLayout="row wrap" fxLayoutGap="10px" fxFlex="20"  fxLayoutAlign="start">
+                        <div><input type="checkbox" name="checkApprove" [(ngModel)]="checkApprove" aria-label="I understand that reservation will be approved by hotel reception"> I understand that reservation will be approved by hotel reception</div>
+                    </div>
+                </div>
+                <div class="" fxLayout="row" fxLayoutGap="100px" fxLayoutAlign="space-around center">
+                    <button class="btn" fxFlex="60px" (click)="closeModal('custom-modal-2');">Cancel</button>
+                    <button class="btn" fxFlex="60px" [disabled]="!checkApprove" (click)="moveToBooking()">Ok</button>            
+                </div>
         </div>
-        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
-            <label>Expiration date</label>
-            <div class="form-control">
-                <input type="date" required formControlName="checkDate" aria-label="Check in date">
-            </div>
-            <div *ngIf="stayFormGroup.controls['checkDate'].invalid && (stayFormGroup.controls['checkDate'].dirty || stayFormGroup.controls['checkDate'].touched)">
-                <p class="text-danger" *ngIf="stayFormGroup.controls.checkDate?.errors?.required" aria-label="Please select check-in date">Please select check-in date</p>
-            </div>
-        </div>
-        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
-            <label for="paymentOption">CVV</label>
-            <div class="form-control">
-                <input type="text" required formControlName="firstName" aria-label="First name">
-            </div>
-            <div *ngIf="guestFormGroup.controls['firstName'].invalid && (guestFormGroup.controls['firstName'].dirty || guestFormGroup.controls['firstName'].touched)">
-                <p class="text-danger" *ngIf="guestFormGroup.controls.firstName?.errors?.required" aria-label="Please enter first name">Please enter first name</p>
-            </div>
-        </div>
-        <div class="" fxLayout="row" fxLayoutAlign="space-around center">
+        </pkglobal-jw-modal>
+        <div class="" fxLayout="row" fxLayoutGap="100px" fxLayoutAlign="space-around center">
             <button class="btn" fxFlex="60px" (click)="backToPrev();">Back</button>
-            <button class="btn" fxFlex="60px" (click)="goToNext();">Proceed</button>            
-        </div> -->
+            <button class="btn" fxFlex="60px" [disabled]="cardFormGroup.invalid" (click)="openModal('custom-modal-2');">Proceed</button>            
+        </div>
     </div>
 </div>

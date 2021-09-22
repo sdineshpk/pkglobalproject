@@ -1,0 +1,87 @@
+.header-label{
+    padding: 23px;
+    label{
+        font-weight: bolder;
+    }
+}
+.content{
+    padding: 0px 40px;
+    .form-group{
+        margin-bottom: 24px;
+        label{
+            font-size: 12px;
+            font-weight:400;
+            color: rgb(78, 65, 187);
+        }
+        .form-control{
+            input[type=date]{
+                width: 200px;
+                height: 30px;
+            }
+            input[type=text]{
+                width: 200px;
+                height: 30px;
+            }
+            select{
+                width: 200px;
+                height: 30px;
+            }
+        }
+        .text-danger{
+            color:#8f0000;
+            margin: 0px;
+            font-size: 12px;
+        }
+    }
+    .btn-group{
+        margin-left: 660px;
+        
+    }
+    .guest-box{
+        width: 100%;
+        text-align: center;
+        background-color: #a9a9a9ab;
+        padding: 50px 0px;
+        border: 2px solid #3122be;
+        border-radius: 50px;
+        margin-bottom: 20px;
+    }
+    .btn{
+        width: 60px;
+        padding: 4px;
+        font-size: 14px;
+    }
+
+    .btn:hover{
+        cursor: pointer;
+    }
+
+    .guest-list{
+        background-color: #FFF;
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 10px;
+        padding: 10px;
+        .guest-name{
+            font-size: 16px;
+            font-weight: bold;
+            padding-bottom: 4px;
+        }
+        .guest-basic-details{
+            padding-bottom: 4px;
+            color: blue;
+            span{
+                border-left: 2px solid black;
+                padding-left: 4px;
+            }
+        }
+        .guest-address{
+            color: blue;
+            span{
+                font-size: 14px;
+                font-weight: 400;
+                color: black;
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+<div class="header-label">
+    <label>My Bookings</label>
+</div>
+<div class="content">
+    <div class="guest-box" *ngIf="!bookList.length">
+        <p>You have no bookings yet</p>
+    </div>
+    <div class="guest-list" *ngFor="let item of bookList">
+        <label class="guest-name">Dinesh <span style="float: right;">2 guest(s)</span></label>
+        <label class="guest-basic-details">Room: Delux </label>
+        <label class="guest-address">Check in : <span>2021-12-10</span></label>
+        <label class="guest-address">Check out : <span>2021-12-10</span></label>
+    </div>
+</div>
