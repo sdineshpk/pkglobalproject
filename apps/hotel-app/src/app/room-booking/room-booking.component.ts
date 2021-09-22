@@ -2,21 +2,7 @@ import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl} from "@angular/forms"
 import { ModalService } from '../_modal/modal.service';
 import { Router } from '@angular/router';
-
-interface foodService {
-  name: string,
-  value: string
-}
-
-interface guests {
-  firstName: string,
-  lastName: string,
-  age:string,
-  gender:string,
-  email:string,
-  phone:string,
-  address:string
-}
+import { foodService, guests, bookings, RoomService } from '../room.service';
 
 @Component({
   selector: 'pkglobal-room-booking',
@@ -25,8 +11,9 @@ interface guests {
 })
 export class RoomBookingComponent {
 
-  options="payment";
+  options="yourStay";
   guestList:Array<guests>=[];
+  UPINumber='';
   Data: Array<foodService> = [
     { name: 'Breakfast', value: 'breakfast' },
     { name: 'Lunch', value: 'lunch' },
@@ -60,7 +47,7 @@ paymentOptions='card';
 checkApprove=false;
 
   constructor(
-      private fb: FormBuilder,private modalService: ModalService,private router: Router )
+      private fb: FormBuilder,private modalService: ModalService,private router: Router,private roomService:RoomService )
   { }
 
   openModal(id: string) {
@@ -123,6 +110,13 @@ checkApprove=false;
 
   moveToBooking(){
     this.closeModal('custom-modal-2');
+    const bookings:bookings={
+      room:this.stayFormGroup.value.roomType,
+      checkIn:this.stayFormGroup.value.checkDate,
+      checkOut:this.stayFormGroup.value.checkOut,
+      guestList:this.guestList
+    }
+    this.roomService.addBookList(bookings);
     this.router.navigate(['/myBooking']);
   }
 

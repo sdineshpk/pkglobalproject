@@ -1,13 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
-interface bookings {
-  firstName: string,
-  lastName: string,
-  room:string,
-  checkIn:Date,
-  checkOut:Date,
-  guestList:number
-}
+import { bookings } from '../room.service';
 
 @Component({
   selector: 'pkglobal-my-booking',

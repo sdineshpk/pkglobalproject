@@ -6,9 +6,9 @@
         <p>You have no bookings yet</p>
     </div>
     <div class="guest-list" *ngFor="let item of bookList">
-        <label class="guest-name">Dinesh <span style="float: right;">2 guest(s)</span></label>
-        <label class="guest-basic-details">Room: Delux </label>
-        <label class="guest-address">Check in : <span>2021-12-10</span></label>
-        <label class="guest-address">Check out : <span>2021-12-10</span></label>
+        <label class="guest-name">{{item.guestList[0].firstName+" "+item.guestList[0].lastName}} <span style="float: right;">{{item.guestList.length}} guest(s)</span></label>
+        <label class="guest-basic-details">Room: {{item.room}} </label>
+        <label class="guest-address">Check in : <span>{{item.checkIn|date:'YYYY-MM-DD'}}</span></label>
+        <label class="guest-address">Check out : <span>{{item.checkOut|date:'YYYY-MM-DD'}}</span></label>
     </div>
 </div>

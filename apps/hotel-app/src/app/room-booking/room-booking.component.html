@@ -105,7 +105,7 @@
                         <input type="text" required formControlName="firstName" aria-label="First name">
                     </div>
                     <div *ngIf="guestFormGroup.controls['firstName'].invalid && (guestFormGroup.controls['firstName'].dirty || guestFormGroup.controls['firstName'].touched)">
-                        <p class="text-danger" *ngIf="guestFormGroup.controls.firstName?.errors?.required" aria-label="Please enter first name">Please enter first name</p>
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.firstName?.errors?.required" role="alert" aria-label="Please enter first name">Please enter first name</p>
                     </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -114,7 +114,7 @@
                         <input type="text" required formControlName="lastName" aria-label="Last name">
                     </div>
                     <div *ngIf="guestFormGroup.controls['lastName'].invalid && (guestFormGroup.controls['lastName'].dirty || guestFormGroup.controls['lastName'].touched)">
-                        <p class="text-danger" *ngIf="guestFormGroup.controls.lastName?.errors?.required" aria-label="Please enter last name">Please enter last name</p>
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.lastName?.errors?.required" role="alert" aria-label="Please enter last name">Please enter last name</p>
                     </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -124,7 +124,7 @@
                         <div><input type="radio" value="female"  formControlName="gender" name="gender" aria-label="Female"> Female</div>
                     </div>
                     <div *ngIf="guestFormGroup.controls['gender'].invalid && (guestFormGroup.controls['gender'].dirty || guestFormGroup.controls['gender'].touched)">
-                        <p class="text-danger" *ngIf="guestFormGroup.controls.gender?.errors?.required" aria-label="Please select gender">Please select gender</p>
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.gender?.errors?.required" role="alert" aria-label="Please select gender">Please select gender</p>
                     </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -133,7 +133,7 @@
                         <input type="text" required formControlName="phone" aria-label="Phone number" placeholder="Phone number">
                     </div>
                     <div *ngIf="guestFormGroup.controls['phone'].invalid && (guestFormGroup.controls['phone'].dirty || guestFormGroup.controls['phone'].touched)">
-                        <p class="text-danger" *ngIf="guestFormGroup.controls.phone?.errors?.required" aria-label="Please enter phone number">Please enter phone number</p>
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.phone?.errors?.required" role="alert" aria-label="Please enter phone number">Please enter phone number</p>
                     </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -142,7 +142,7 @@
                         <input type="email" required formControlName="email" aria-label="Please provide email id" placeholder="Email">
                     </div>
                     <div *ngIf="guestFormGroup.controls['email'].invalid && (guestFormGroup.controls['email'].dirty || guestFormGroup.controls['email'].touched)">
-                        <p class="text-danger" *ngIf="guestFormGroup.controls.email?.errors?.required" aria-label="Please enter email">Please enter email</p>
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.email?.errors?.required" role="alert" aria-label="Please enter email">Please enter email</p>
                     </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -151,7 +151,7 @@
                         <textarea required formControlName="address" aria-label="Enter address details" placeholder="Enter address"></textarea>
                     </div>
                     <div *ngIf="guestFormGroup.controls['address'].invalid && (guestFormGroup.controls['address'].dirty || guestFormGroup.controls['address'].touched)">
-                        <p class="text-danger" *ngIf="guestFormGroup.controls.address?.errors?.required" aria-label="Please enter address">Please enter address</p>
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.address?.errors?.required" role="alert" aria-label="Please enter address">Please enter address</p>
                     </div>
                 </div>
                 <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -160,11 +160,11 @@
                         <input required formControlName="age" type="text" aria-label="Enter age" placeholder="Age">
                     </div>
                     <div *ngIf="guestFormGroup.controls['age'].invalid && (guestFormGroup.controls['age'].dirty || guestFormGroup.controls['age'].touched)">
-                        <p class="text-danger" *ngIf="guestFormGroup.controls.age?.errors?.required" aria-label="Please enter age">Please enter age</p>
+                        <p class="text-danger" *ngIf="guestFormGroup.controls.age?.errors?.required" role="alert" aria-label="Please enter age">Please enter age</p>
                     </div>
                 </div>
                 <div class="btn-group">
-                    <button class="btn" [disabled]="guestFormGroup.invalid">Save</button>
+                    <button class="btn" [disabled]="guestFormGroup.invalid" aria-label="Save guest details">Save</button>
                 </div>
             </form>
         </div>
@@ -192,14 +192,14 @@
             </div>
         </div>
         <div>
-        <form [formGroup]="cardFormGroup" (ngSubmit)="goToNext()" fxLayout="row wrap" fxLayoutGap="30px" fxFlex="100"  fxLayoutAlign="space-between">
+        <form [formGroup]="cardFormGroup" *ngIf="paymentOptions==='card'" fxLayout="row wrap" fxLayoutGap="30px" fxFlex="100"  fxLayoutAlign="space-between">
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                 <label for="paymentOption">Card holder name</label>
                 <div class="form-control">
                     <input type="text" required formControlName="cardHolderName" aria-label="Card holder name">
                 </div>
                 <div *ngIf="cardFormGroup.controls['cardHolderName'].invalid && (cardFormGroup.controls['cardHolderName'].dirty || cardFormGroup.controls['cardHolderName'].touched)">
-                    <p class="text-danger" *ngIf="cardFormGroup.controls.cardHolderName?.errors?.required" aria-label="Please enter Card holder name">Please enter Card holder name</p>
+                    <p class="text-danger" *ngIf="cardFormGroup.controls.cardHolderName?.errors?.required" role="alert" aria-label="Please enter Card holder name">Please enter Card holder name</p>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
@@ -208,13 +208,13 @@
                     <input type="text" required formControlName="cardNumber" aria-label="Card number">
                 </div>
                 <div *ngIf="cardFormGroup.controls['cardNumber'].invalid && (cardFormGroup.controls['cardNumber'].dirty || cardFormGroup.controls['cardNumber'].touched)">
-                    <p class="text-danger" *ngIf="cardFormGroup.controls.cardNumber?.errors?.required" aria-label="Please enter Card number">Please enter Card number</p>
+                    <p class="text-danger" *ngIf="cardFormGroup.controls.cardNumber?.errors?.required" role="alert" aria-label="Please enter Card number">Please enter Card number</p>
                 </div>
             </div>
             <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
                 <label>Expiration date</label>
                 <div class="form-control">
-                    <input type="text" required placeholder="mm/yy" formControlName="expirationDate" aria-label="Expiration date">
+                    <input type="text" required placeholder="mm/yy" formControlName="expirationDate" role="alert" aria-label="Expiration date">
                 </div>
                 <div *ngIf="cardFormGroup.controls['expirationDate'].invalid && (cardFormGroup.controls['expirationDate'].dirty || cardFormGroup.controls['expirationDate'].touched)">
                     <p class="text-danger" *ngIf="cardFormGroup.controls.expirationDate?.errors?.required" aria-label="Please enter Expiration date">Please enter Expiration date</p>
@@ -226,10 +226,19 @@
                     <input type="text" required formControlName="CVV" aria-label="CVV">
                 </div>
                 <div *ngIf="cardFormGroup.controls['CVV'].invalid && (cardFormGroup.controls['CVV'].dirty || cardFormGroup.controls['CVV'].touched)">
-                    <p class="text-danger" *ngIf="cardFormGroup.controls.CVV?.errors?.required" aria-label="Please enter CVV">Please enter CVV</p>
+                    <p class="text-danger" *ngIf="cardFormGroup.controls.CVV?.errors?.required" role="alert" aria-label="Please enter CVV">Please enter CVV</p>
                 </div>
             </div>
         </form>
+        <div class="form-group" fxLayout="column" fxLayoutGap="5px" fxLayoutAlign="flex-start">
+            <label for="UPINumber">Enter UPI number</label>
+            <div class="form-control" fxLayout="row wrap" fxLayoutGap="10px" fxFlex="20"  fxLayoutAlign="start">
+                <input type="text" [(ngModel)]="UPINumber"  name="UPINumber" aria-label="Enter UPI number" placeholder="Enter UPI number">
+            </div>
+            <div *ngIf="!UPINumber" role="alert">
+                <p class="text-danger" role="alert" aria-label="Please enter UPI number">Please enter UPI number</p>
+            </div>
+        </div>
         </div>
         <pkglobal-jw-modal id="custom-modal-2">
             <div class="model-header" fxLayout="row" fxLayoutAlign="space-around center">
@@ -250,8 +259,8 @@
         </div>
         </pkglobal-jw-modal>
         <div class="" fxLayout="row" fxLayoutGap="100px" fxLayoutAlign="space-around center">
-            <button class="btn" fxFlex="60px" (click)="backToPrev();">Back</button>
-            <button class="btn" fxFlex="60px" [disabled]="cardFormGroup.invalid" (click)="openModal('custom-modal-2');">Proceed</button>            
+            <button class="btn" fxFlex="60px" (click)="backToPrev();" aria-label="Back to guest screen">Back</button>
+            <button class="btn" fxFlex="60px" [disabled]="cardFormGroup.invalid" (click)="openModal('custom-modal-2');" aria-label="Proceed for booking">Proceed</button>            
         </div>
     </div>
 </div>
