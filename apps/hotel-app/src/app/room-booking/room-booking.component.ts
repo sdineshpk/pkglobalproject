@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormControl} from "@angular/forms"
 import { ModalService } from '../_modal/modal.service';
+import { Router } from '@angular/router';
 
 interface foodService {
   name: string,
@@ -59,7 +60,7 @@ paymentOptions='card';
 checkApprove=false;
 
   constructor(
-      private fb: FormBuilder,private modalService: ModalService )
+      private fb: FormBuilder,private modalService: ModalService,private router: Router )
   { }
 
   openModal(id: string) {
@@ -122,6 +123,7 @@ checkApprove=false;
 
   moveToBooking(){
     this.closeModal('custom-modal-2');
+    this.router.navigate(['/myBooking']);
   }
 
 
